@@ -1,16 +1,20 @@
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class application extends Application {
     public static void main (String [] args){
-        Stan h = new Stan();
-        System.out.println(h.loadAllUsers());
+
         launch(args);
-    };
+    }
 
     @Override
     public void start(Stage stage) throws Exception {

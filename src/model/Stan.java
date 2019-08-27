@@ -74,7 +74,7 @@ public class Stan {
         this.brojSoba=brojSoba;
     }
 
-    public Stan(int id, int vlasnik, String adresaStana, String brojKvadrata, String brojSoba, String cijena, int mjesto, int vrstaStana, Image image) {
+    public Stan(int id, int vlasnik, String adresaStana, String brojKvadrata, String brojSoba, String cijena, int mjesto, int vrstaStana) {
         this.id = id;
         this.vlasnik = vlasnik;
         this.adresaStana = adresaStana;
@@ -83,7 +83,6 @@ public class Stan {
         this.cijena = cijena;
         this.mjesto = mjesto;
         this.vrstaStana = vrstaStana;
-        this.image = image;
     }
 
     public int getId() {
@@ -164,11 +163,11 @@ public class Stan {
 
     public static Stan add (Stan s){
         try {
-            ByteArrayOutputStream os = new ByteArrayOutputStream();
-            ImageIO.write(SwingFXUtils.fromFXImage(s.getImage(), null), "jpg", os);
-            InputStream fis = new ByteArrayInputStream(os.toByteArray());
+           // ByteArrayOutputStream os = new ByteArrayOutputStream();
+           // ImageIO.write(SwingFXUtils.fromFXImage(s.getImage(), null), "jpg", os);
+           // InputStream fis = new ByteArrayInputStream(os.toByteArray());
 
-            PreparedStatement stmnt = Database.CONNECTION.prepareStatement("INSERT INTO stan VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement stmnt = Database.CONNECTION.prepareStatement("INSERT INTO stan (vlasnik_fk,adresa,brojKvadrata,brojSoba,cijena,mjesto_fk,vrstaStana_fk) VALUES (?, ?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
             stmnt.setInt(1, s.getVlasnik());
             stmnt.setString(2, s.getAdresaStana());
             stmnt.setString(3, s.getBrojKvadrata());
@@ -176,7 +175,10 @@ public class Stan {
             stmnt.setString(5, s.getCijena());
             stmnt.setInt(6, s.getMjestoInt());
             stmnt.setInt(7, s.getVrstaStanaInt());
-            stmnt.setBinaryStream(8, fis);
+          //  stmnt.setBinaryStream(8, fis);
+           // System.out.println("test: " + stmnt.toString()); PROVJERA PODATAKA ZA SPREMANJE U BAZU
+
+
             stmnt.executeUpdate();
             ResultSet rs = stmnt.getGeneratedKeys();
             if (rs.next()){
@@ -184,10 +186,7 @@ public class Stan {
             }
             return s;
         } catch (SQLException e) {
-            System.out.println("Stan nije dodan: "+ e.getMessage());
-            return null;
-        } catch (IOException e) {
-            System.out.println("Stan nije dodan: "+ e.getMessage());
+            System.out.println("Stan nije dodan: " + e.getMessage());
             return null;
         }
     }
@@ -206,9 +205,9 @@ public class Stan {
 
     public static boolean update(Stan s) {
         try {
-            ByteArrayOutputStream os = new ByteArrayOutputStream();
-            ImageIO.write(SwingFXUtils.fromFXImage(s.getImage(), null), "jpg", os);
-            InputStream fis = new ByteArrayInputStream(os.toByteArray());
+            //ByteArrayOutputStream os = new ByteArrayOutputStream();
+            //ImageIO.write(SwingFXUtils.fromFXImage(s.getImage(), null), "jpg", os);
+            //InputStream fis = new ByteArrayInputStream(os.toByteArray());
 
             PreparedStatement stmnt = Database.CONNECTION.prepareStatement("UPDATE stan SET vlasnik_fk=?, adresa=?, brojKvadrata=?, brojSoba=?, cijena=?, mjesto_fk=?, vrstaStana_fk=?  WHERE id_stan=?");
             stmnt.setInt(1, s.getVlasnik());
@@ -219,10 +218,10 @@ public class Stan {
             stmnt.setInt(6, s.getMjestoInt());
             stmnt.setInt(7, s.getVrstaStanaInt());
             stmnt.setInt(8, s.getId());
-            stmnt.setBinaryStream(4, fis);
+            //stmnt.setBinaryStream(4, fis);
             stmnt.executeUpdate();
             return true;
-        } catch (SQLException | IOException e) {
+        }catch (SQLException e) {
             System.out.println("Stan nije uređen: " + e.getMessage());
             return false;
         }
@@ -236,10 +235,10 @@ public class Stan {
             while(rs.next()){
                 Image fxSlika = null;
                 try {
-                    BufferedImage bImage = ImageIO.read(rs.getBinaryStream(5));
-                    fxSlika = SwingFXUtils.toFXImage(bImage, null);
-                } catch (NullPointerException | IOException ex) {
-                    fxSlika = null;
+                    //BufferedImage bImage = ImageIO.read(rs.getBinaryStream(5));
+                    //fxSlika = SwingFXUtils.toFXImage(bImage, null);
+                } catch (NullPointerException ex) {
+                    //fxSlika = null;
                 }
 
                 stan.add(new Stan(
@@ -250,8 +249,8 @@ public class Stan {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getInt(7),
-                        rs.getInt(8),
-                        fxSlika
+                        rs.getInt(8)
+                        //fxSlika
                 ));
             }
             return stan;
@@ -343,8 +342,8 @@ public class Stan {
         }
     }
 
-    public List<Helper> loadAllUsers(){
-        ObservableList<Helper> a = FXCollections.observableArrayList();
+    public ArrayList<Helper> loadAllUsers(){
+        ArrayList<Helper> a = new ArrayList<Helper>();
         //ArrayList<Helper> a = new ArrayList<Helper>();
         try {
             Statement stmnt = Database.CONNECTION.createStatement();
@@ -359,11 +358,6 @@ public class Stan {
             return a;
         }
     }
-
-
-
-
-
 
 
 

@@ -5,18 +5,32 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Administracija">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Administracija">
    <children>
       <Label layoutX="14.0" layoutY="47.0" prefHeight="70.0" prefWidth="268.0" text="Dobrodošli u administraciju.">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="uKorisnicima" layoutX="38.0" layoutY="117.0" mnemonicParsing="false" onAction="#upravljajKorisnicima" prefHeight="32.0" prefWidth="138.0" text="Upravljaj Korisnicima" />
-      <Button fx:id="vStanovima" layoutX="38.0" layoutY="169.0" mnemonicParsing="false" onAction="#upravljajStanovima" prefHeight="32.0" prefWidth="138.0" text="Upravljaj Stanovima" />
-      <Button fx:id="vMjesta" layoutX="38.0" layoutY="218.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="138.0" text="Upravljaj Mjestima" />
-      <Button fx:id="vVrstaStana" layoutX="38.0" layoutY="269.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="138.0" text="Upravljaj Vrsta Stana" />
-      <Button fx:id="vOdjava" layoutX="498.0" layoutY="337.0" mnemonicParsing="false" onAction="#odjava" prefHeight="49.0" prefWidth="88.0" text="Odjava" />
+      <Button fx:id="uKorisnicima" layoutX="38.0" layoutY="137.0" mnemonicParsing="false" onAction="#upravljajKorisnicima" prefHeight="58.0" prefWidth="195.0" text="Upravljaj Korisnicima" textFill="#5232f2">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button fx:id="vStanovima" layoutX="38.0" layoutY="214.0" mnemonicParsing="false" onAction="#upravljajStanovima" prefHeight="58.0" prefWidth="195.0" text="Upravljaj Stanovima" textFill="#7727e8">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button fx:id="vMjesta" layoutX="38.0" layoutY="288.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="195.0" text="Upravljaj Mjestima" textFill="#8f0ff2">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button fx:id="vVrstaStana" layoutX="38.0" layoutY="365.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="195.0" text="Upravljaj Vrsta Stana" textFill="#8105f5">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button fx:id="vOdjava" layoutX="664.0" layoutY="529.0" mnemonicParsing="false" onAction="#odjava" prefHeight="118.0" prefWidth="215.0" text="Odjava" textFill="#f52828">
+         <font>
+            <Font size="43.0" />
+         </font></Button>
    </children>
 </AnchorPane>

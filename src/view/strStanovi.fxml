@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="493.0" prefWidth="823.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StrUpravljanjeStanovima">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StrUpravljanjeStanovima">
     <children>
         <Label layoutX="40.0" layoutY="136.0" text="Adresa" />
         <Label layoutX="40.0" layoutY="192.0" text="Broj kvadrata" />

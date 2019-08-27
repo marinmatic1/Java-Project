@@ -8,8 +8,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import model.Database;
 import model.Stan;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -82,7 +87,7 @@ public class StrUpravljanjeStanovima implements Initializable {
 
     Stan stan = new Stan();
 
-    Stan s = new Stan();
+
 
 
 
@@ -118,14 +123,36 @@ public class StrUpravljanjeStanovima implements Initializable {
         String mjesto = this.vMjesto.getText();
         String vrstaStana = this.vVrstaStana.getText();
         String vlasnik = this.vVlasnik.getText();
+        int vlasnikFK=0;
+        int mjestoFK=0;
+        int vrstaStanaFK=0;
 
 
+        try{
+            PreparedStatement stmnt = Database.CONNECTION.prepareStatement("SELECT korisnik.id_vlasnik,mjesto.id_mjesto,vrstastana.id_vrstaStana FROM korisnik,mjesto,vrstastana WHERE korisnickoIme=? AND nazivMjesta=? AND vrstaStana=?");
+            stmnt.setString(1,vlasnik);
+            stmnt.setString(2,mjesto);
+            stmnt.setString(3,vrstaStana);
+            ResultSet rs = stmnt.executeQuery();
+
+            if(rs.next()){
+                vlasnikFK=rs.getInt(1);
+                mjestoFK=rs.getInt(2);
+                vrstaStanaFK=rs.getInt(3);
+            }
+
+            System.out.println(vlasnikFK);
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        if(vlasnikFK==0 || mjestoFK==0 || vrstaStanaFK==0){
+            return;
+        }
 
 
-
-
-
-        if(adresa.equals("")||brojKvadrata.equals("")||brojSoba.equals("")||cijena.equals("")){
+        if(adresa.equals("")||brojKvadrata.equals("")||brojSoba.equals("")||cijena.equals("")||vlasnik.equals("")||mjesto.equals("")&(vrstaStana=="namješten"||vrstaStana=="nenamješten")){
             return;
         }
 
@@ -134,14 +161,19 @@ public class StrUpravljanjeStanovima implements Initializable {
             this.selectedStan.setBrojKvadrata(brojKvadrata);
             this.selectedStan.setBrojSoba(brojSoba);
             this.selectedStan.setCijena(cijena);
+            this.selectedStan.setVlasnik(vlasnikFK);
+            this.selectedStan.setMjesto(mjestoFK);
+            this.selectedStan.setVrstaStana(vrstaStanaFK);
 
 
             Stan.update(this.selectedStan);
             this.selectedStan=null;
             this.btnDodajStan.setText("Dodaj Stan");
+            this.popuniStanove();
         } else{
-            Stan s = new Stan();
+            Stan s = new Stan(0,vlasnikFK,adresa,brojKvadrata,brojSoba,cijena,mjestoFK,vrstaStanaFK);
             Stan.add(s);
+            this.popuniStanove();
         }
     }
 
