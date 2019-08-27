@@ -17,7 +17,7 @@ public class Ugovor {
     public Ugovor() {
     }
 
-    public Ugovor(int id, String opis, Date datum, int stan, int vlasnik, int klijent) {
+    public Ugovor(int id, String opis, Date datum, int stan, int vlasnik) {
         this.id = id;
         this.opis = opis;
         this.datum = datum;
@@ -76,12 +76,11 @@ public class Ugovor {
 
     public static Ugovor add (Ugovor u){
         try {
-            PreparedStatement stmnt = Database.CONNECTION.prepareStatement("INSERT INTO ugovor VALUES (null, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement stmnt = Database.CONNECTION.prepareStatement("INSERT INTO ugovor VALUES (null, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
             stmnt.setString(1, u.getOpis());
             stmnt.setDate(2, u.getDatum());
             stmnt.setInt(3, u.getStan());
             stmnt.setInt(4, u.getVlasnik());
-            stmnt.setInt(5, u.getKlijent());
             stmnt.executeUpdate();
             ResultSet rs = stmnt.getGeneratedKeys();
             if (rs.next()){
@@ -108,12 +107,12 @@ public class Ugovor {
 
     public static boolean update(Ugovor u) {
         try {
-            PreparedStatement stmnt = Database.CONNECTION.prepareStatement("UPDATE ugovor SET opis=?, datum=?, stan_fk=?, vlasnik_fk=?, klijent_fk=?  WHERE id_ugovor=?");
+            PreparedStatement stmnt = Database.CONNECTION.prepareStatement("UPDATE ugovor SET opis=?, datum=?, stan_fk=?, vlasnik_fk=? WHERE id_ugovor=?");
             stmnt.setString(1, u.getOpis());
             stmnt.setDate(2, u.getDatum());
             stmnt.setInt(3, u.getStan());
             stmnt.setInt(4, u.getVlasnik());
-            stmnt.setInt(5, u.getKlijent());
+
             stmnt.setInt(6, u.getId());
             stmnt.executeUpdate();
             return true;
@@ -136,8 +135,7 @@ public class Ugovor {
                         rs.getString(2),
                         rs.getDate(3),
                         rs.getInt(4),
-                        rs.getInt(5),
-                        rs.getInt(6)
+                        rs.getInt(5)
                 ));
             }
             return ugovor;

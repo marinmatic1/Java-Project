@@ -20,7 +20,7 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Button fx:id="vMjesta" layoutX="38.0" layoutY="288.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="195.0" text="Upravljaj Mjestima" textFill="#8f0ff2">
+      <Button fx:id="vMjesta" layoutX="38.0" layoutY="288.0" mnemonicParsing="false" onAction="#upravljajMjestima" prefHeight="58.0" prefWidth="195.0" text="Upravljaj Mjestima" textFill="#8f0ff2">
          <font>
             <Font size="18.0" />
          </font></Button>

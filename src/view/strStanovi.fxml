@@ -12,7 +12,7 @@
     <children>
         <Label layoutX="40.0" layoutY="136.0" text="Adresa" />
         <Label layoutX="40.0" layoutY="192.0" text="Broj kvadrata" />
-        <Label layoutX="40.0" layoutY="235.0" text="Broj soba" />
+        <Label layoutX="41.0" layoutY="245.0" text="Broj soba" />
         <Label layoutX="40.0" layoutY="298.0" text="Cijena" />
         <TextField fx:id="vAdresa" layoutX="16.0" layoutY="159.0" />
         <TextField fx:id="vBrojKvadrata" layoutX="16.0" layoutY="208.0" />

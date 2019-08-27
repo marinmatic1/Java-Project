@@ -36,4 +36,9 @@ public class Administracija {
         u.showNewWindow("strStanovi", ev);
     }
 
+    public void upravljajMjestima(ActionEvent ev){
+        Utils u = new Utils();
+        u.showNewWindow("strMjesto", ev);
+    }
+
 }
