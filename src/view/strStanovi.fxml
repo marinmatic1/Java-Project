@@ -47,5 +47,6 @@
             <Font size="15.0" />
          </font>
       </Button>
+      <Button fx:id="ukloniBtn" layoutX="156.0" layoutY="403.0" mnemonicParsing="false" onAction="#ukloni" prefHeight="71.0" prefWidth="95.0" text="Ukloni Stan" textFill="#f21414" />
     </children>
 </AnchorPane>

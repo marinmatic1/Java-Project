@@ -68,6 +68,9 @@ public class StrAdmin implements Initializable {
     @FXML
     Button vOdjava;
 
+
+
+
     Korisnik selectedUser = null;
 
     @Override

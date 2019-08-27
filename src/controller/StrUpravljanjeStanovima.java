@@ -82,6 +82,9 @@ public class StrUpravljanjeStanovima implements Initializable {
     @FXML
     Button vOdjava;
 
+    @FXML
+    Button ukloniBtn;
+
 
     Stan selectedStan = null;
 
@@ -175,6 +178,13 @@ public class StrUpravljanjeStanovima implements Initializable {
             Stan.add(s);
             this.popuniStanove();
         }
+    }
+
+    @FXML
+    public void ukloni(ActionEvent ev){
+        Stan korisnik = (Stan) this.vlasnikTablica.getSelectionModel().getSelectedItem();
+        Stan.remove(korisnik);
+        this.popuniStanove();
     }
 
 
