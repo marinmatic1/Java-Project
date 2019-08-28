@@ -1,12 +1,12 @@
 package controller;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import model.Database;
@@ -16,6 +16,7 @@ import model.Stan;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -86,6 +87,14 @@ public class StrUpravljanjeStanovima implements Initializable {
     @FXML
     Button ukloniBtn;
 
+    @FXML
+    ChoiceBox cbVlasnik;
+
+    @FXML
+    ChoiceBox cbMjesto;
+
+    @FXML
+    ChoiceBox cbVrsta;
 
     Stan selectedStan = null;
 
@@ -93,10 +102,9 @@ public class StrUpravljanjeStanovima implements Initializable {
 
     public static Korisnik uneseniKorisnik;
 
-
-
-
-
+    ObservableList<String> mjesta = FXCollections.observableArrayList();
+    ObservableList<String> vlasnik = FXCollections.observableArrayList();
+    ObservableList<String> vrsta = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -108,6 +116,61 @@ public class StrUpravljanjeStanovima implements Initializable {
         this.tblMjesto.setCellValueFactory(new PropertyValueFactory<>("Mjesto"));
         this.tblIme.setCellValueFactory(new PropertyValueFactory<>("ime"));
         this.tblPrezime.setCellValueFactory(new PropertyValueFactory<>("prezime"));
+
+
+        try {
+            Statement stmnt = Database.CONNECTION.createStatement();
+            ResultSet rs = stmnt.executeQuery("SELECT mjesto.nazivMjesta FROM mjesto");
+
+            while (rs.next()) {
+                this.mjesta.add(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            System.out.println("Mjesto se ne moze izvuci iz baze: " + e.getMessage());
+        }
+
+        try {
+            Statement stmnt = Database.CONNECTION.createStatement();
+            ResultSet rs = stmnt.executeQuery("SELECT korisnik.korisnickoIme,korisnik.uloga FROM korisnik");
+
+            while (rs.next()) {
+                if(rs.getString(2).equals("VLASNIK")){
+                    this.vlasnik.add(rs.getString(1));
+                }
+                else{
+                    continue;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Mjesto se ne moze izvuci iz baze: " + e.getMessage());
+        }
+
+        this.vrsta.add(0,"namješten");
+        this.vrsta.add(1,"nenamješten");
+        cbVlasnik.setItems(this.vlasnik);
+        cbVlasnik.setTooltip(new Tooltip("Odaberi vlasnika"));
+        cbVlasnik.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                vVlasnik.setText(vlasnik.get(newValue.intValue()));
+            }
+        });
+        cbMjesto.setItems(this.mjesta);
+        cbMjesto.setTooltip(new Tooltip("Odaberi mjesto"));
+        cbMjesto.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                vMjesto.setText(mjesta.get(newValue.intValue()));
+            }
+        });
+        cbVrsta.setItems(this.vrsta);
+        cbVrsta.setTooltip(new Tooltip("Odaberi vrstu stana"));
+        cbVrsta.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                vVrstaStana.setText(vrsta.get(newValue.intValue()));
+            }
+        });
 
         this.popuniStanove();
     }
@@ -151,7 +214,6 @@ public class StrUpravljanjeStanovima implements Initializable {
                 }
             }
 
-            System.out.println(vlasnikFK);
 
         }catch(SQLException e){
             e.printStackTrace();
@@ -194,7 +256,7 @@ public class StrUpravljanjeStanovima implements Initializable {
         this.popuniStanove();
     }
 
-
+    @FXML
     public void odjava(ActionEvent ev){
         Utils u = new Utils();
         u.showNewWindow("login", ev);

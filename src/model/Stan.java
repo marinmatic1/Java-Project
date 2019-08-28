@@ -277,7 +277,7 @@ public class Stan {
         }
 
     }
-    static Login l = new Login();
+    static Login trenutniLogirani = new Login();
 
 
 
@@ -288,7 +288,7 @@ public class Stan {
             ResultSet rs = stmnt.executeQuery("SELECT id_stan,korisnik.ime,korisnik.prezime,adresa,brojKvadrata,brojSoba,cijena,mjesto.nazivMjesta,vrstastana.vrstaStana,korisnik.id_vlasnik\n" +
                     "FROM stan,korisnik,mjesto,vrstastana\n" + "WHERE vlasnik_fk=korisnik.id_vlasnik AND mjesto_fk=mjesto.id_mjesto AND vrstaStana_fk=vrstastana.id_vrstaStana");
             while(rs.next()){
-                if(l.dohvatiID()!=(rs.getInt(10))){
+                if(trenutniLogirani.dohvatiID()!=(rs.getInt(10))){
                     continue;
                 }
                 stanovi.add(new Stan(
