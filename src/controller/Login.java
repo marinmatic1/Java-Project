@@ -48,7 +48,7 @@ public class Login implements Initializable {
                 Utils u = new Utils();
 
                 if (logiraniKorisnik.getUloga().equals("VLASNIK")) {
-                    u.showNewWindow("strVlasnik", a);
+                    u.showNewWindow("usrVlasnik", a);
                 }
                 else if (logiraniKorisnik.getUloga().equals("KLIJENT")){
                     u.showNewWindow("strKlijent", a);
@@ -61,6 +61,21 @@ public class Login implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public String dohvatiLogiranog(){
+        return this.logiraniKorisnik.getKorisnickoIme();
+    }
+
+    public int dohvatiID(){
+        return this.logiraniKorisnik.getId();
+    }
+
+    public String dohvatiIme(){
+        return this.logiraniKorisnik.getIme();
+    }
+    public String dohvatiPrezime(){
+        return this.logiraniKorisnik.getPrezime();
     }
 
     @Override

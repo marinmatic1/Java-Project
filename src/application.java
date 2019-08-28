@@ -1,3 +1,4 @@
+import controller.Login;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,7 +13,6 @@ import java.util.List;
 
 public class application extends Application {
     public static void main (String [] args){
-
         launch(args);
     }
 

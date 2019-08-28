@@ -1,24 +1,15 @@
 package model;
 
+import controller.Login;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import model.Helper;
 
 public class Stan {
     private int id;
@@ -286,78 +277,40 @@ public class Stan {
         }
 
     }
-    public String kIme;
-    public Stan(String kIme,String Mjesto,String VrstaStana){
-        this.kIme=kIme;
-        this.Mjesto=Mjesto;
-        this.VrstaStana=VrstaStana;
+    static Login l = new Login();
+
+
+
+    public static List<Stan> specialUsrSelect(){
+        ObservableList<Stan> stanovi = FXCollections.observableArrayList();
+        try{
+            Statement stmnt = Database.CONNECTION.createStatement();
+            ResultSet rs = stmnt.executeQuery("SELECT id_stan,korisnik.ime,korisnik.prezime,adresa,brojKvadrata,brojSoba,cijena,mjesto.nazivMjesta,vrstastana.vrstaStana,korisnik.id_vlasnik\n" +
+                    "FROM stan,korisnik,mjesto,vrstastana\n" + "WHERE vlasnik_fk=korisnik.id_vlasnik AND mjesto_fk=mjesto.id_mjesto AND vrstaStana_fk=vrstastana.id_vrstaStana");
+            while(rs.next()){
+                if(l.dohvatiID()!=(rs.getInt(10))){
+                    continue;
+                }
+                stanovi.add(new Stan(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9)
+                ));
+            }
+            return stanovi;
+        }catch (SQLException e){
+            System.out.println("Stanovi se ne mogu izvuci iz baze: "+ e.getMessage());
+            return stanovi;
+        }
+
     }
 
-    Helper h = new Helper(0,"");
-
-    public ArrayList<Helper> list = new ArrayList<Helper>();
-
-    /*public ArrayList loadAllUsers(){
-        ArrayList<String> a = new ArrayList<String>();
-        try {
-            Statement stmnt = Database.CONNECTION.createStatement();
-            ResultSet rs = stmnt.executeQuery("SELECT korisnik.korisnickoIme\n"+"FROM korisnik");
-
-            while (rs.next()){
-                a.add(rs.getString(1));
-            }return a;
-        } catch (SQLException e){
-            System.out.println("Greska u dohvaćanju korisnickih imena"+ e.getMessage());
-            return a;
-        }
-     }
-*/
-     public ArrayList loadAllMjesta(){
-        ArrayList<String> a = new ArrayList<String>();
-         try {
-             Statement stmnt = Database.CONNECTION.createStatement();
-             ResultSet rs = stmnt.executeQuery("SELECT mjesto.nazivMjesta\n"+"FROM mjesto");
-
-             while (rs.next()){
-                 a.add(rs.getString(1));
-             }return a;
-         } catch (SQLException e){
-             System.out.println("Greska u dohvaćanju mjesta"+ e.getMessage());
-             return a;
-         }
-     }
-
-    public ArrayList loadAllVrste(){
-        ArrayList<String> a = new ArrayList<String>();
-        try {
-            Statement stmnt = Database.CONNECTION.createStatement();
-            ResultSet rs = stmnt.executeQuery("SELECT vrstastana.vrstaStana\n"+"FROM mjesto");
-
-            while (rs.next()){
-                a.add(rs.getString(1));
-            }return a;
-        } catch (SQLException e){
-            System.out.println("Greska u dohvaćanju vrsta stana"+ e.getMessage());
-            return a;
-        }
-    }
-
-    public ArrayList<Helper> loadAllUsers(){
-        ArrayList<Helper> a = new ArrayList<Helper>();
-        //ArrayList<Helper> a = new ArrayList<Helper>();
-        try {
-            Statement stmnt = Database.CONNECTION.createStatement();
-            ResultSet rs = stmnt.executeQuery("SELECT korisnik.id_vlasnik,korisnik.korisnickoIme\n"+"FROM korisnik");
-
-            while (rs.next()){
-                a.add(new Helper(rs.getInt(1),
-                rs.getString(2)));
-            }return a;
-        } catch (SQLException e){
-            System.out.println("Greska u dohvaćanju korisnickih imena"+ e.getMessage());
-            return a;
-        }
-    }
 
 
 
