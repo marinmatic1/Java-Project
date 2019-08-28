@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import model.Database;
+import model.Korisnik;
 import model.Stan;
 
 import java.sql.PreparedStatement;
@@ -90,6 +91,8 @@ public class StrUpravljanjeStanovima implements Initializable {
 
     Stan stan = new Stan();
 
+    public static Korisnik uneseniKorisnik;
+
 
 
 
@@ -142,6 +145,10 @@ public class StrUpravljanjeStanovima implements Initializable {
                 vlasnikFK=rs.getInt(1);
                 mjestoFK=rs.getInt(2);
                 vrstaStanaFK=rs.getInt(3);
+                this.uneseniKorisnik = Korisnik.get(rs.getInt(1));
+                if(uneseniKorisnik.getUloga().equals("KLIJENT")||uneseniKorisnik.getUloga().equals("ADMIN")){
+                    return;
+                }
             }
 
             System.out.println(vlasnikFK);
