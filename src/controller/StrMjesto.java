@@ -63,15 +63,19 @@ public class StrMjesto implements Initializable{
         }
         this.popuniMjesta();
         this.vMjesto.setText("");
-
     }
 
     @FXML
     public void izbrisi(ActionEvent ev){
         Mjesto mjesto = (Mjesto) this.mjestaTablica.getSelectionModel().getSelectedItem();
-        Mjesto.remove(mjesto);
-        this.popuniMjesta();
+        if(mjesto==null){
+            return;
         }
+        else{
+            Mjesto.remove(mjesto);
+            this.popuniMjesta();
+        }
+    }
 
     public void administracija(ActionEvent ev){
         Utils u = new Utils();

@@ -157,11 +157,10 @@ public class UsrVlasnik implements Initializable{
                 vVrstaStana.setText(vrstaStana.get(newValue.intValue()));
             }
         });
-
-
-
         this.popuniStanove();
     }
+
+
     private void popuniStanove(){
         ObservableList<Stan> s = (ObservableList<Stan>) stan.specialUsrSelect();
         this.tableStanovi.setItems(s);
@@ -230,8 +229,13 @@ public class UsrVlasnik implements Initializable{
     @FXML
     public void ukloni(ActionEvent ev){
         Stan stan = (Stan) this.tableStanovi.getSelectionModel().getSelectedItem();
-        Stan.remove(stan);
-        this.popuniStanove();
+        if(stan==null){
+            return;
+        }
+        else{
+            Stan.remove(stan);
+            this.popuniStanove();
+        }
     }
 
     @FXML

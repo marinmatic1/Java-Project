@@ -60,12 +60,18 @@ public class StrUgovor implements Initializable{
     @FXML
     Button zahtjevBtn;
 
+    @FXML
+    Button odjavaBtn;
+
+
 
     Stan stan = new Stan();
 
     Stan selectedStan = null;
 
     Ugovor selectedUgovor = null;
+
+    Login logiraniKorisnik = new Login();
 
 
 
@@ -95,11 +101,11 @@ public class StrUgovor implements Initializable{
     public void zahtjev(ActionEvent ev){
         String opis=this.vOpis.getText();
         Date datum = Date.valueOf(vDatum.getValue());
-
-
+        String korisnickoIme = this.logiraniKorisnik.dohvatiLogiranog();
         Stan s = (Stan) this.stanTablica.getSelectionModel().getSelectedItem();
         int stanID=0;
         stanID = s.getId();
+
 
         if(opis.equals("")||datum.equals("")||stanID==0){
             return;
@@ -115,13 +121,14 @@ public class StrUgovor implements Initializable{
             this.selectedUgovor=null;
         }
         else {
-            Ugovor u = new Ugovor(0,opis,datum,stanID,0);
+            Ugovor u = new Ugovor(0,opis,datum,stanID,0,korisnickoIme);
             Ugovor.add(u);
         }
-
-
-
     }
 
+    public void odjava(ActionEvent ev){
+        Utils u = new Utils();
+        u.showNewWindow("login", ev);
+    }
 
 }

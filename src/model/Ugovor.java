@@ -12,17 +12,27 @@ public class Ugovor {
     private Date datum;
     private int stan;
     private int potvrda;
+    private String imeKlijenta;
 
     public Ugovor() {
     }
 
-    public Ugovor(int id, String opis, Date datum, int stan, int potvrda) {
+    public Ugovor(int id, String opis, Date datum, int stan, int potvrda,String imeKlijenta) {
         this.id = id;
         this.opis = opis;
         this.datum = datum;
         this.stan = stan;
         this.potvrda=potvrda;
+        this.imeKlijenta=imeKlijenta;
 
+    }
+
+    public String getImeKlijenta() {
+        return imeKlijenta;
+    }
+
+    public void setImeKlijenta(String imeKlijenta) {
+        this.imeKlijenta = imeKlijenta;
     }
 
     public int getId() {
@@ -67,11 +77,12 @@ public class Ugovor {
 
     public static Ugovor add (Ugovor u){
         try {
-            PreparedStatement stmnt = Database.CONNECTION.prepareStatement("INSERT INTO ugovor VALUES (null, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement stmnt = Database.CONNECTION.prepareStatement("INSERT INTO ugovor VALUES (null, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
             stmnt.setString(1, u.getOpis());
             stmnt.setDate(2, u.getDatum());
-            stmnt.setInt(3, u.getPotvrda());
-            stmnt.setInt(4,u.getStan());
+            stmnt.setInt(3, u.getStan());
+            stmnt.setInt(4,u.getPotvrda());
+            stmnt.setString(5,u.getImeKlijenta());
             stmnt.executeUpdate();
             ResultSet rs = stmnt.getGeneratedKeys();
             if (rs.next()){
@@ -98,10 +109,12 @@ public class Ugovor {
 
     public static boolean update(Ugovor u) {
         try {
-            PreparedStatement stmnt = Database.CONNECTION.prepareStatement("UPDATE ugovor SET opis=?, datum=?, stan_fk=?, Potvrda=? WHERE id_ugovor=?");
+            PreparedStatement stmnt = Database.CONNECTION.prepareStatement("UPDATE ugovor SET opis=?, datum=?, stan_fk=?, Potvrda=?, imeKlijenta=? WHERE id_ugovor=?");
             stmnt.setString(1, u.getOpis());
             stmnt.setDate(2, u.getDatum());
             stmnt.setInt(3, u.getStan());
+            stmnt.setInt(4,u.getPotvrda());
+            stmnt.setString(5,u.getImeKlijenta());
 
             stmnt.setInt(6, u.getId());
             stmnt.executeUpdate();
@@ -125,7 +138,8 @@ public class Ugovor {
                         rs.getString(2),
                         rs.getDate(3),
                         rs.getInt(4),
-                        rs.getInt(5)
+                        rs.getInt(5),
+                        rs.getString(5)
                 ));
             }
             return ugovor;

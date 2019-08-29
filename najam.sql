@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 29, 2019 at 02:58 PM
+-- Generation Time: Aug 29, 2019 at 06:59 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.1.31
 
@@ -110,16 +110,16 @@ CREATE TABLE `ugovor` (
   `opis` text COLLATE utf8_unicode_ci NOT NULL,
   `datum` date NOT NULL,
   `stan_fk` int(11) NOT NULL,
-  `Potvrda` tinyint(1) NOT NULL
+  `Potvrda` tinyint(1) NOT NULL,
+  `imeKlijenta` varchar(45) CHARACTER SET utf8 COLLATE utf8_croatian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `ugovor`
 --
 
-INSERT INTO `ugovor` (`id_ugovor`, `opis`, `datum`, `stan_fk`, `Potvrda`) VALUES
-(1, 'Kratak opis', '2019-08-14', 2, 0),
-(2, 'Neki tekst 2', '2019-08-14', 6, 0);
+INSERT INTO `ugovor` (`id_ugovor`, `opis`, `datum`, `stan_fk`, `Potvrda`, `imeKlijenta`) VALUES
+(8, 'ovo je neki opis', '2019-08-21', 6, 0, 'pero');
 
 -- --------------------------------------------------------
 
@@ -204,7 +204,7 @@ ALTER TABLE `stan`
 -- AUTO_INCREMENT for table `ugovor`
 --
 ALTER TABLE `ugovor`
-  MODIFY `id_ugovor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_ugovor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `vrstastana`

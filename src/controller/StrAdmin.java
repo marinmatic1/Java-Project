@@ -158,8 +158,13 @@ public class StrAdmin implements Initializable {
     @FXML
     public void pobrisiKorisnika(ActionEvent ev){
         Korisnik korisnik = (Korisnik) this.korisnikTablica.getSelectionModel().getSelectedItem();
-        Korisnik.remove(korisnik);
-        this.popuniKorisnike();
+        if(korisnik==null){
+            return;
+        }
+        else{
+            Korisnik.remove(korisnik);
+            this.popuniKorisnike();
+        }
     }
 
 

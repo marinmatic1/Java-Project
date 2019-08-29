@@ -253,8 +253,13 @@ public class StrUpravljanjeStanovima implements Initializable {
     @FXML
     public void ukloni(ActionEvent ev){
         Stan s = (Stan) this.vlasnikTablica.getSelectionModel().getSelectedItem();
-        Stan.remove(s);
-        this.popuniStanove();
+        if(s==null){
+            return;
+        }
+        else{
+            Stan.remove(s);
+            this.popuniStanove();
+        }
     }
 
     @FXML
