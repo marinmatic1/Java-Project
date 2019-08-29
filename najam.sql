@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 27, 2019 at 09:44 PM
+-- Generation Time: Aug 29, 2019 at 02:58 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.1.31
 
@@ -96,7 +96,8 @@ CREATE TABLE `stan` (
 
 INSERT INTO `stan` (`id_stan`, `vlasnik_fk`, `adresa`, `brojKvadrata`, `brojSoba`, `cijena`, `mjesto_fk`, `vrstaStana_fk`) VALUES
 (1, 1, 'Zagrebacka 126', '100', '3', '600 KM', 1, 1),
-(2, 2, 'mostar', '188', '4', '400', 1, 1);
+(2, 2, 'mostar', '188', '4', '400', 1, 1),
+(6, 2, 'mostar', '120', '4', '600 KM', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -108,15 +109,17 @@ CREATE TABLE `ugovor` (
   `id_ugovor` int(11) NOT NULL,
   `opis` text COLLATE utf8_unicode_ci NOT NULL,
   `datum` date NOT NULL,
-  `stan_fk` int(11) NOT NULL
+  `stan_fk` int(11) NOT NULL,
+  `Potvrda` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `ugovor`
 --
 
-INSERT INTO `ugovor` (`id_ugovor`, `opis`, `datum`, `stan_fk`) VALUES
-(1, 'Kratak opis', '2019-08-14', 2);
+INSERT INTO `ugovor` (`id_ugovor`, `opis`, `datum`, `stan_fk`, `Potvrda`) VALUES
+(1, 'Kratak opis', '2019-08-14', 2, 0),
+(2, 'Neki tekst 2', '2019-08-14', 6, 0);
 
 -- --------------------------------------------------------
 
@@ -183,7 +186,7 @@ ALTER TABLE `vrstastana`
 -- AUTO_INCREMENT for table `korisnik`
 --
 ALTER TABLE `korisnik`
-  MODIFY `id_vlasnik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_vlasnik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `mjesto`
@@ -195,13 +198,13 @@ ALTER TABLE `mjesto`
 -- AUTO_INCREMENT for table `stan`
 --
 ALTER TABLE `stan`
-  MODIFY `id_stan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_stan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `ugovor`
 --
 ALTER TABLE `ugovor`
-  MODIFY `id_ugovor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_ugovor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `vrstastana`
