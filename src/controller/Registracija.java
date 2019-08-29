@@ -68,7 +68,6 @@ public class Registracija implements Initializable{
         });
     }
 
-
     @FXML
     public void dodajKorisnika(ActionEvent ev) throws Exception {
         String ime = this.vIme.getText();

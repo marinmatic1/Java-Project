@@ -11,19 +11,18 @@ public class Ugovor {
     private String opis;
     private Date datum;
     private int stan;
-    private int vlasnik;
-    private int klijent;
+    private int potvrda;
 
     public Ugovor() {
     }
 
-    public Ugovor(int id, String opis, Date datum, int stan, int vlasnik) {
+    public Ugovor(int id, String opis, Date datum, int stan, int potvrda) {
         this.id = id;
         this.opis = opis;
         this.datum = datum;
         this.stan = stan;
-        this.vlasnik = vlasnik;
-        this.klijent = klijent;
+        this.potvrda=potvrda;
+
     }
 
     public int getId() {
@@ -58,20 +57,12 @@ public class Ugovor {
         this.stan = stan;
     }
 
-    public int getVlasnik() {
-        return vlasnik;
+     public int getPotvrda() {
+        return potvrda;
     }
 
-    public void setVlasnik(int vlasnik) {
-        this.vlasnik = vlasnik;
-    }
-
-    public int getKlijent() {
-        return klijent;
-    }
-
-    public void setKlijent(int klijent) {
-        this.klijent = klijent;
+    public void setPotvrda(int potvrda) {
+        this.potvrda = potvrda;
     }
 
     public static Ugovor add (Ugovor u){
@@ -79,8 +70,8 @@ public class Ugovor {
             PreparedStatement stmnt = Database.CONNECTION.prepareStatement("INSERT INTO ugovor VALUES (null, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
             stmnt.setString(1, u.getOpis());
             stmnt.setDate(2, u.getDatum());
-            stmnt.setInt(3, u.getStan());
-            stmnt.setInt(4, u.getVlasnik());
+            stmnt.setInt(3, u.getPotvrda());
+            stmnt.setInt(4,u.getStan());
             stmnt.executeUpdate();
             ResultSet rs = stmnt.getGeneratedKeys();
             if (rs.next()){
@@ -107,11 +98,10 @@ public class Ugovor {
 
     public static boolean update(Ugovor u) {
         try {
-            PreparedStatement stmnt = Database.CONNECTION.prepareStatement("UPDATE ugovor SET opis=?, datum=?, stan_fk=?, vlasnik_fk=? WHERE id_ugovor=?");
+            PreparedStatement stmnt = Database.CONNECTION.prepareStatement("UPDATE ugovor SET opis=?, datum=?, stan_fk=?, Potvrda=? WHERE id_ugovor=?");
             stmnt.setString(1, u.getOpis());
             stmnt.setDate(2, u.getDatum());
             stmnt.setInt(3, u.getStan());
-            stmnt.setInt(4, u.getVlasnik());
 
             stmnt.setInt(6, u.getId());
             stmnt.executeUpdate();
@@ -144,4 +134,8 @@ public class Ugovor {
             return ugovor;
         }
     }
+
+
+
+
 }

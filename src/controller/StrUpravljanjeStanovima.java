@@ -99,6 +99,8 @@ public class StrUpravljanjeStanovima implements Initializable {
 
     Stan stan = new Stan();
 
+
+
     public static Korisnik uneseniKorisnik;
 
     ObservableList<String> mjesta = FXCollections.observableArrayList();
@@ -250,8 +252,8 @@ public class StrUpravljanjeStanovima implements Initializable {
 
     @FXML
     public void ukloni(ActionEvent ev){
-        Stan korisnik = (Stan) this.vlasnikTablica.getSelectionModel().getSelectedItem();
-        Stan.remove(korisnik);
+        Stan s = (Stan) this.vlasnikTablica.getSelectionModel().getSelectedItem();
+        Stan.remove(s);
         this.popuniStanove();
     }
 
