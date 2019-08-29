@@ -50,7 +50,6 @@ public class StrUpravljanjeStanovima implements Initializable {
     @FXML
     TableColumn tblMjesto;
 
-
     @FXML
     TableView vlasnikTablica;
 

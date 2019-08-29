@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.paint.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="341.0" prefWidth="498.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Login">
+<AnchorPane prefHeight="341.0" prefWidth="498.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Login">
    <children>
-      <ImageView fx:id="slikaImg" disable="true" fitHeight="339.0" fitWidth="507.0" layoutX="2.0" layoutY="74.0" opacity="0.21" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fx:id="slikaImg" disable="true" fitHeight="339.0" fitWidth="507.0" layoutX="6.0" layoutY="1.0" opacity="0.21" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="-6.0" AnchorPane.topAnchor="1.0">
          <image>
             <Image url="@96973cbf86767f4e77c39b94f7e43f13_30ac2c50d02768d5ea52fd45f670e896bd3acca2_large.jpg" />
          </image>
@@ -35,5 +33,6 @@
             <Font name="Ebrima Bold" size="13.0" />
          </font>
       </Button>
+      <Button fx:id="registracijaBtn" layoutX="179.0" layoutY="269.0" mnemonicParsing="false" onAction="#registracija" prefHeight="30.0" prefWidth="118.0" text="Registriraj se" underline="true" />
    </children>
 </AnchorPane>

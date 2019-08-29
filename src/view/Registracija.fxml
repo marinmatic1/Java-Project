@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="413.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Registracija">
+   <children>
+      <Label layoutX="86.0" layoutY="81.0" text="Prezime" />
+      <Label layoutX="84.0" layoutY="28.0" prefHeight="28.0" prefWidth="28.0" text="Ime" />
+      <Label layoutX="84.0" layoutY="123.0" text="Korisničko ime" />
+      <Label layoutX="89.0" layoutY="299.0" text="Broj telefona" />
+      <Label layoutX="87.0" layoutY="165.0" text="Lozinka" />
+      <Label layoutX="91.0" layoutY="251.0" text="Uloga" />
+      <TextField fx:id="vIme" layoutX="86.0" layoutY="56.0" />
+      <TextField fx:id="vPrezime" layoutX="86.0" layoutY="98.0" />
+      <TextField fx:id="vKorisnickoIme" layoutX="86.0" layoutY="140.0" />
+      <TextField fx:id="vUloga" layoutX="86.0" layoutY="268.0" />
+      <TextField fx:id="vBrojTelefona" layoutX="86.0" layoutY="316.0" />
+      <Button fx:id="dodajBtn" layoutX="87.0" layoutY="351.0" mnemonicParsing="false" onAction="#dodajKorisnika" text="Dodaj korisnika" />
+      <Button fx:id="loginBtn" layoutX="553.0" layoutY="330.0" mnemonicParsing="false" onAction="#showLogin" prefHeight="68.0" prefWidth="115.0" text="Nazad na login" />
+      <Label fx:id="label" layoutX="248.0" layoutY="27.0" prefHeight="58.0" prefWidth="433.0" textFill="#0044ff">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="vLozinka" layoutX="88.0" layoutY="182.0" />
+      <PasswordField fx:id="vLozinka1" layoutX="88.0" layoutY="226.0" />
+      <Label layoutX="87.0" layoutY="207.0" prefHeight="17.0" prefWidth="98.0" text="Potvrda lozinke" />
+      <ChoiceBox fx:id="cbUloga" layoutX="248.0" layoutY="268.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>

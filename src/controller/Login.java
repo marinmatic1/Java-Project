@@ -28,6 +28,9 @@ public class Login implements Initializable {
     @FXML
     ImageView slikaImg;
 
+    @FXML
+    Button registracijaBtn;
+
     public static Korisnik logiraniKorisnik;
 
     @FXML
@@ -62,6 +65,13 @@ public class Login implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public void registracija(ActionEvent a){
+        Utils u = new Utils();
+        u.showNewWindow("Registracija", a);
+    }
+
+
 
     public String dohvatiLogiranog(){
         return this.logiraniKorisnik.getKorisnickoIme();

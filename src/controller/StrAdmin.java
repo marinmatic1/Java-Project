@@ -1,4 +1,7 @@
 package controller;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -68,6 +71,12 @@ public class StrAdmin implements Initializable {
     @FXML
     Button vOdjava;
 
+    @FXML
+            ChoiceBox cbUloga;
+
+
+
+    ObservableList<String> uloga = FXCollections.observableArrayList();
 
 
 
@@ -82,6 +91,21 @@ public class StrAdmin implements Initializable {
         this.korisnikLozinka.setCellValueFactory(new PropertyValueFactory<>("lozinka"));
         this.korisnikUloga.setCellValueFactory(new PropertyValueFactory<>("uloga"));
         this.korisnikBroj.setCellValueFactory(new PropertyValueFactory<>("brojTelefona"));
+
+        this.uloga.add(0,"KLIJENT");
+        this.uloga.add(1,"VLASNIK");
+        this.uloga.add(2,"ADMIN");
+        cbUloga.setItems(uloga);
+
+        cbUloga.setTooltip(new Tooltip("Odaberi ulogu.."));
+        cbUloga.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                kUlogaTxt.setText(uloga.get(newValue.intValue()));
+            }
+        });
+
+
 
         this.popuniKorisnike();
     }
