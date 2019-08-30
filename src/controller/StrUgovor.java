@@ -81,7 +81,8 @@ public class StrUgovor implements Initializable{
 
     public void ucitaj(int ugovorID){
         Stan s = (Stan) this.stanTablica.getSelectionModel().getSelectedItem();
-        int id = s.getId();
+        int id = s.getVlasnik();
+        System.out.println(id);
 
         try {
             PreparedStatement stmnt = Database.CONNECTION.prepareStatement("SELECT * FROM korisnik WHERE id_vlasnik=?");
@@ -126,6 +127,7 @@ public class StrUgovor implements Initializable{
         this.tblMjesto.setCellValueFactory(new PropertyValueFactory<>("Mjesto"));
         this.tblIme.setCellValueFactory(new PropertyValueFactory<>("ime"));
         this.tblPrezime.setCellValueFactory(new PropertyValueFactory<>("prezime"));
+
 
 
         this.popuniStanove();

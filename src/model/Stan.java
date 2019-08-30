@@ -52,9 +52,21 @@ public class Stan {
 
     public Stan() {
     }
-
     public Stan (int id,String ime,String prezime,String adresaStana,String brojKvadrata,String brojSoba,String cijena,String Mjesto,String VrstaStana){
         this.id=id;
+        this.ime=ime;
+        this.prezime=prezime;
+        this.adresaStana=adresaStana;
+        this.brojKvadrata=brojKvadrata;
+        this.cijena=cijena;
+        this.Mjesto=Mjesto;
+        this.VrstaStana=VrstaStana;
+        this.brojSoba=brojSoba;
+    }
+
+    public Stan (int id,int vlasnik,String ime,String prezime,String adresaStana,String brojKvadrata,String brojSoba,String cijena,String Mjesto,String VrstaStana){
+        this.id=id;
+        this.vlasnik=vlasnik;
         this.ime=ime;
         this.prezime=prezime;
         this.adresaStana=adresaStana;
@@ -255,19 +267,20 @@ public class Stan {
         ObservableList<Stan> stanovi = FXCollections.observableArrayList();
         try{
             Statement stmnt = Database.CONNECTION.createStatement();
-            ResultSet rs = stmnt.executeQuery("SELECT id_stan,korisnik.ime,korisnik.prezime,adresa,brojKvadrata,brojSoba,cijena,mjesto.nazivMjesta,vrstastana.vrstaStana\n" +
+            ResultSet rs = stmnt.executeQuery("SELECT id_stan,stan.vlasnik_fk,korisnik.ime,korisnik.prezime,adresa,brojKvadrata,brojSoba,cijena,mjesto.nazivMjesta,vrstastana.vrstaStana\n" +
                     "FROM stan,korisnik,mjesto,vrstastana\n" + "WHERE vlasnik_fk=korisnik.id_vlasnik AND mjesto_fk=mjesto.id_mjesto AND vrstaStana_fk=vrstastana.id_vrstaStana");
             while(rs.next()){
                 stanovi.add(new Stan(
                     rs.getInt(1),
-                    rs.getString(2),
+                    rs.getInt(2),
                     rs.getString(3),
                     rs.getString(4),
                     rs.getString(5),
                     rs.getString(6),
                     rs.getString(7),
                     rs.getString(8),
-                    rs.getString(9)
+                    rs.getString(9),
+                    rs.getString(10)
                 ));
                 }
             return stanovi;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 30, 2019 at 07:15 PM
+-- Generation Time: Aug 30, 2019 at 07:52 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.1.31
 
@@ -119,7 +119,7 @@ CREATE TABLE `ugovor` (
 --
 
 INSERT INTO `ugovor` (`id_ugovor`, `opis`, `datum`, `stan_fk`, `Potvrda`, `imeKlijenta`) VALUES
-(31, 'neki opis 2', '2019-08-21', 2, 'U razmatranju..', 'pero');
+(34, 'neki opis 1', '2019-08-13', 6, 'U razmatranju..', 'pero');
 
 -- --------------------------------------------------------
 
@@ -139,7 +139,7 @@ CREATE TABLE `vlasnikugovor` (
 --
 
 INSERT INTO `vlasnikugovor` (`id_vlasnikUgovor`, `ime`, `prezime`, `ugovor_fk`) VALUES
-(9, 'Marin', 'Matic', 31);
+(10, 'Marin', 'Matic', 34);
 
 -- --------------------------------------------------------
 
@@ -231,13 +231,13 @@ ALTER TABLE `stan`
 -- AUTO_INCREMENT for table `ugovor`
 --
 ALTER TABLE `ugovor`
-  MODIFY `id_ugovor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_ugovor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `vlasnikugovor`
 --
 ALTER TABLE `vlasnikugovor`
-  MODIFY `id_vlasnikUgovor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_vlasnikUgovor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `vrstastana`
