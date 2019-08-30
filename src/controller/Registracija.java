@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import model.Korisnik;
 
 import javax.xml.soap.Text;
@@ -49,6 +50,7 @@ public class Registracija implements Initializable{
     @FXML
     ChoiceBox cbUloga;
 
+
     Korisnik selectedUser = null;
 
     ObservableList<String> uloga = FXCollections.observableArrayList();
@@ -79,14 +81,26 @@ public class Registracija implements Initializable{
         String lozinka2=this.vLozinka1.getText();
 
         if(!lozinka.equals(lozinka2)){
+            label.setTextFill(Color.web("#ff0000"));
+            label.setText("Lozinka se ne podudara!");
             return;
         }
 
-        if(uloga.equals("ADMIN") & !(uloga.equals("VLASNIK") || uloga.equals("KLIJENT"))){
+        if(uloga.equals("ADMIN")){
+            label.setTextFill(Color.web("#0076a3"));
+            label.setText("DOBAR POKUŠAJ ALI NE MOŽE hehehehe");
+            return;
+        }
+
+        if(!(uloga.equals("VLASNIK") || uloga.equals("KLIJENT"))){
+            label.setTextFill(Color.web("#ff0000"));
+            label.setText("KLIJENT ili VLASNIK mora biti odabran!");
             return;
         }
 
         if (ime.equals("") || prezime.equals("") || kIme.equals("") || lozinka.equals("") || uloga.equals("") || brojTelefona.equals("")) {
+            label.setTextFill(Color.web("#ff0000"));
+            label.setText("Unesite potpune podatke!");
             return;
         }
         if (this.selectedUser != null) {

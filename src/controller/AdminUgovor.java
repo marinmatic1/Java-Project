@@ -46,22 +46,34 @@ public class AdminUgovor implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
-
-
-
         this.vOpis.setCellValueFactory(new PropertyValueFactory<>("opis"));
         this.vDatum.setCellValueFactory(new PropertyValueFactory<>("datum"));
-        this.vImeVlasnika.setCellValueFactory(new PropertyValueFactory<>("stan"));
         this.vStanje.setCellValueFactory(new PropertyValueFactory<>("potvrda"));
         this.vImeKlijenta.setCellValueFactory(new PropertyValueFactory<>("imeKlijenta"));
+        this.vImeVlasnika.setCellValueFactory(new PropertyValueFactory<>("imeVlasnika"));
 
         popuniUgovore();
 
     }
     private void popuniUgovore(){
-        ObservableList<Ugovor> u = (ObservableList<Ugovor>) ugovor.select();
+        ObservableList<Ugovor> u = (ObservableList<Ugovor>) ugovor.fullSelect();
         this.tableUgovor.setItems(u);
+    }
+
+    @FXML
+    public void izbrisi(ActionEvent ev){
+        Ugovor u = (Ugovor) this.tableUgovor.getSelectionModel().getSelectedItem();
+        if(u==null){
+            return;
+        }
+        else{
+            Ugovor.remove(u);
+            this.popuniUgovore();
+        }
+    }
+    public void administracija(ActionEvent ev){
+        Utils u = new Utils();
+        u.showNewWindow("login", ev);
     }
 
 }

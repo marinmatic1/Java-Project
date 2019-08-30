@@ -1,5 +1,6 @@
 package model;
 
+import controller.Login;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -26,11 +27,10 @@ public class Ugovor {
     public Ugovor() {
     }
 
-    public Ugovor(int id, String opis, Date datum, int stan, int potvrda, String imeKlijenta, String imeVlasnika) {
+    public Ugovor(int id, String opis, Date datum, int potvrda, String imeKlijenta, String imeVlasnika) {
         this.id = id;
         this.opis = opis;
         this.datum = datum;
-        this.stan = stan;
         this.potvrda = potvrda;
         this.imeKlijenta = imeKlijenta;
         this.imeVlasnika = imeVlasnika;
@@ -161,6 +161,32 @@ public class Ugovor {
                         rs.getString(5)
                 ));
             }
+            return ugovor;
+        } catch (SQLException e) {
+            System.out.println("Nisam uspio izvuci ugovor iz baze: " + e.getMessage());
+            return ugovor;
+        }
+    }
+
+    public static Login logiraniKorisnik= new Login();
+
+    public static List<Ugovor> fullSelect() {
+        ObservableList<Ugovor> ugovor = FXCollections.observableArrayList();
+        try {
+            Statement stmnt = Database.CONNECTION.createStatement();
+            ResultSet rs = stmnt.executeQuery("SELECT ugovor.id_ugovor,ugovor.opis,ugovor.datum,ugovor.potvrda,ugovor.imeKlijenta,vlasnikugovor.ime FROM ugovor,vlasnikugovor WHERE id_ugovor=vlasnikugovor.ugovor_FK");
+             while(rs.next()) {
+                 if (logiraniKorisnik.dohvatiIme().equals(rs.getString(6))) {
+                        ugovor.add(new Ugovor(
+                             rs.getInt(1),
+                             rs.getString(2),
+                             rs.getDate(3),
+                             rs.getInt(4),
+                             rs.getString(5),
+                             rs.getString(6)
+                     ));
+                 }
+             }
             return ugovor;
         } catch (SQLException e) {
             System.out.println("Nisam uspio izvuci ugovor iz baze: " + e.getMessage());

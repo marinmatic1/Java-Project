@@ -33,5 +33,10 @@
             <Font size="18.0" />
          </font>
       </Button>
+      <Label fx:id="label" layoutX="451.0" layoutY="353.0" prefHeight="80.0" prefWidth="427.0" text="Čekanje na zahtjev..">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

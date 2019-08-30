@@ -84,9 +84,12 @@ public class Login implements Initializable {
     public String dohvatiIme(){
         return this.logiraniKorisnik.getIme();
     }
+
     public String dohvatiPrezime(){
         return this.logiraniKorisnik.getPrezime();
     }
+
+    public String dohvatiUlogu(){return this.logiraniKorisnik.getUloga();}
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

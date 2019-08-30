@@ -63,6 +63,8 @@ public class StrUgovor implements Initializable{
     @FXML
     Button odjavaBtn;
 
+    @FXML
+    Label label;
 
 
     Stan stan = new Stan();
@@ -80,7 +82,6 @@ public class StrUgovor implements Initializable{
     public void ucitaj(int ugovorID){
         Stan s = (Stan) this.stanTablica.getSelectionModel().getSelectedItem();
         int id = s.getId();
-        System.out.println(ugovorID);
 
         try {
             PreparedStatement stmnt = Database.CONNECTION.prepareStatement("SELECT * FROM korisnik WHERE id_vlasnik=?");
@@ -93,6 +94,7 @@ public class StrUgovor implements Initializable{
             e.printStackTrace();
         }
 
+
         try {
             PreparedStatement stmnt = Database.CONNECTION.prepareStatement("INSERT INTO vlasnikugovor VALUES (?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
             stmnt.setInt(1,0);
@@ -104,7 +106,7 @@ public class StrUgovor implements Initializable{
             if (rs.next()){
                 this.korisnik.setId(rs.getInt(1));
             }
-            System.out.println(ugovorID);
+            label.setText("Zahtjev uspješno poslat!");
             return;
         } catch (SQLException e) {
             System.out.println("Korisnik nije dodan: "+ e.getMessage());

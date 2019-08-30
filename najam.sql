@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 30, 2019 at 04:31 PM
+-- Generation Time: Aug 30, 2019 at 06:15 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.1.31
 
@@ -46,7 +46,8 @@ INSERT INTO `korisnik` (`id_vlasnik`, `ime`, `prezime`, `korisnickoIme`, `lozink
 (1, 'Anamarija', 'Dumancic', 'anamarija', 'anamarija', 'ADMIN', '063907554'),
 (2, 'Marin', 'Matic', 'marin', 'marin', 'VLASNIK', '123456789'),
 (3, 'Pero', 'Peric', 'pero', 'pero', 'KLIJENT', '063624864'),
-(7, 'Boris', 'Mati?', 'boris', 'boris', 'ADMIN', '063773270');
+(7, 'Boris', 'Mati?', 'boris', 'boris', 'ADMIN', '063773270'),
+(10, 'ADMIN', 'admin', 'admin', 'admin', 'ADMIN', '0');
 
 -- --------------------------------------------------------
 
@@ -119,14 +120,11 @@ CREATE TABLE `ugovor` (
 --
 
 INSERT INTO `ugovor` (`id_ugovor`, `opis`, `datum`, `stan_fk`, `Potvrda`, `imeKlijenta`) VALUES
-(8, 'ovo je neki opis', '2019-08-21', 6, 0, 'pero'),
-(10, 'Neki opis 2', '2019-08-06', 6, 0, 'pero'),
-(11, 'Ovo je neki opis 3', '2019-08-12', 6, 0, 'pero'),
-(17, 'neki opis 4', '2019-08-06', 6, 0, 'pero'),
-(18, 'neki opis 4', '2019-08-06', 6, 0, 'pero'),
-(19, 'neki opis 4', '2019-08-20', 6, 0, 'pero'),
 (20, 'neki opiis 54', '2019-08-06', 2, 0, 'pero'),
-(21, 'neki opiis 54', '2019-08-06', 1, 0, 'pero');
+(21, 'neki opiis 54', '2019-08-06', 1, 0, 'pero'),
+(22, 'ugovor 6', '2019-08-14', 1, 0, 'pero'),
+(23, 'ugovor 7', '2019-08-28', 2, 0, 'pero'),
+(24, 'ugovor 8', '2019-08-09', 1, 0, 'pero');
 
 -- --------------------------------------------------------
 
@@ -147,7 +145,10 @@ CREATE TABLE `vlasnikugovor` (
 
 INSERT INTO `vlasnikugovor` (`id_vlasnikUgovor`, `ime`, `prezime`, `ugovor_fk`) VALUES
 (1, 'Marin', 'Matic', 20),
-(2, 'Anamarija', 'Dumancic', 21);
+(2, 'Anamarija', 'Dumancic', 21),
+(3, 'Anamarija', 'Dumancic', 22),
+(4, 'Marin', 'Matic', 23),
+(5, 'Anamarija', 'Dumancic', 24);
 
 -- --------------------------------------------------------
 
@@ -221,7 +222,7 @@ ALTER TABLE `vrstastana`
 -- AUTO_INCREMENT for table `korisnik`
 --
 ALTER TABLE `korisnik`
-  MODIFY `id_vlasnik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_vlasnik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `mjesto`
@@ -239,13 +240,13 @@ ALTER TABLE `stan`
 -- AUTO_INCREMENT for table `ugovor`
 --
 ALTER TABLE `ugovor`
-  MODIFY `id_ugovor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_ugovor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `vlasnikugovor`
 --
 ALTER TABLE `vlasnikugovor`
-  MODIFY `id_vlasnikUgovor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_vlasnikUgovor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `vrstastana`
