@@ -27,12 +27,6 @@ import java.util.ResourceBundle;
 public class StrUpravljanjeStanovima implements Initializable {
 
     @FXML
-    TextField vVrstaStana;
-
-    @FXML
-    TextField vMjesto;
-
-    @FXML
     TableColumn tblAdresa;
 
     @FXML
@@ -78,9 +72,6 @@ public class StrUpravljanjeStanovima implements Initializable {
     Button btnDodajStan;
 
     @FXML
-    TextField vVlasnik;
-
-    @FXML
     Button vOdjava;
 
     @FXML
@@ -98,6 +89,10 @@ public class StrUpravljanjeStanovima implements Initializable {
     Stan selectedStan = null;
 
     Stan stan = new Stan();
+
+    public String Vlasnik;
+    public String mjesto;
+    public String vrstaStana;
 
 
 
@@ -117,7 +112,6 @@ public class StrUpravljanjeStanovima implements Initializable {
         this.tblMjesto.setCellValueFactory(new PropertyValueFactory<>("Mjesto"));
         this.tblIme.setCellValueFactory(new PropertyValueFactory<>("ime"));
         this.tblPrezime.setCellValueFactory(new PropertyValueFactory<>("prezime"));
-
 
         try {
             Statement stmnt = Database.CONNECTION.createStatement();
@@ -150,30 +144,34 @@ public class StrUpravljanjeStanovima implements Initializable {
         this.vrsta.add(1,"nenamješten");
         cbVlasnik.setItems(this.vlasnik);
         cbVlasnik.setTooltip(new Tooltip("Odaberi vlasnika"));
+        cbMjesto.setItems(this.mjesta);
+        cbMjesto.setTooltip(new Tooltip("Odaberi mjesto"));
+        cbVrsta.setItems(this.vrsta);
+        cbVrsta.setTooltip(new Tooltip("Odaberi vrstu stana"));
         cbVlasnik.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                vVlasnik.setText(vlasnik.get(newValue.intValue()));
-            }
-        });
-        cbMjesto.setItems(this.mjesta);
-        cbMjesto.setTooltip(new Tooltip("Odaberi mjesto"));
-        cbMjesto.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                vMjesto.setText(mjesta.get(newValue.intValue()));
-            }
-        });
-        cbVrsta.setItems(this.vrsta);
-        cbVrsta.setTooltip(new Tooltip("Odaberi vrstu stana"));
-        cbVrsta.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                vVrstaStana.setText(vrsta.get(newValue.intValue()));
+                Vlasnik=(vlasnik.get(newValue.intValue()));
             }
         });
 
+
+        cbMjesto.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                mjesto=(mjesta.get(newValue.intValue()));
+            }
+        });
+
+        cbVrsta.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                vrstaStana=vrsta.get(newValue.intValue());
+            }
+        });
         this.popuniStanove();
+
+
     }
     private void popuniStanove(){
         ObservableList<Stan> s = (ObservableList<Stan>) stan.fullSelect();
@@ -190,17 +188,14 @@ public class StrUpravljanjeStanovima implements Initializable {
         String brojKvadrata = this.vBrojKvadrata.getText();
         String brojSoba = this.vBrojSoba.getText();
         String cijena = this.vCijena.getText();
-        String mjesto = this.vMjesto.getText();
-        String vrstaStana = this.vVrstaStana.getText();
-        String vlasnik = this.vVlasnik.getText();
+
         int vlasnikFK=0;
         int mjestoFK=0;
         int vrstaStanaFK=0;
 
-
         try{
             PreparedStatement stmnt = Database.CONNECTION.prepareStatement("SELECT korisnik.id_vlasnik,mjesto.id_mjesto,vrstastana.id_vrstaStana FROM korisnik,mjesto,vrstastana WHERE korisnickoIme=? AND nazivMjesta=? AND vrstaStana=?");
-            stmnt.setString(1,vlasnik);
+            stmnt.setString(1,Vlasnik);
             stmnt.setString(2,mjesto);
             stmnt.setString(3,vrstaStana);
             ResultSet rs = stmnt.executeQuery();
@@ -225,7 +220,7 @@ public class StrUpravljanjeStanovima implements Initializable {
         }
 
 
-        if(adresa.equals("")||brojKvadrata.equals("")||brojSoba.equals("")||cijena.equals("")||vlasnik.equals("")||mjesto.equals("")&(vrstaStana=="namješten"||vrstaStana=="nenamješten")){
+        if(adresa.equals("")||brojKvadrata.equals("")||brojSoba.equals("")||cijena.equals("")||Vlasnik.equals("")||mjesto.equals("")&(vrstaStana.equals("namješten")||vrstaStana.equals("nenamješten"))){
             return;
         }
 

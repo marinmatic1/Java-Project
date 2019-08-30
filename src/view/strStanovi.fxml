@@ -33,15 +33,12 @@
         </TableView>
         <Label layoutX="36.0" layoutY="37.0" />
         <Label layoutX="73.0" layoutY="343.0" text="Mjesto" />
-        <Label layoutX="71.0" layoutY="405.0" text="Vrsta stana" />
-        <TextField fx:id="vMjesto" layoutX="50.0" layoutY="360.0" />
-        <TextField fx:id="vVrstaStana" layoutX="47.0" layoutY="422.0" prefHeight="25.0" prefWidth="156.0" />
+        <Label layoutX="71.0" layoutY="398.0" text="Vrsta stana" />
       <Button fx:id="btnUpravljajKorisnicima" layoutX="571.0" layoutY="458.0" mnemonicParsing="false" onAction="#upravljajKorisnicima" prefHeight="71.0" prefWidth="133.0" text="Administracija" textFill="#007bff">
          <font>
             <Font size="15.0" />
          </font></Button>
       <Button fx:id="btnDodajStan" layoutX="25.0" layoutY="458.0" mnemonicParsing="false" onAction="#dodajStan" prefHeight="71.0" prefWidth="95.0" text="Dodaj Stan" textFill="#0138ff" />
-      <TextField fx:id="vVlasnik" layoutX="50.0" layoutY="305.0" prefHeight="17.0" prefWidth="149.0" />
       <Label layoutX="72.0" layoutY="288.0" text="Vlasnik" />
       <Button fx:id="vOdjava" layoutX="741.0" layoutY="458.0" mnemonicParsing="false" onAction="#odjava" prefHeight="71.0" prefWidth="133.0" text="Odjava" textFill="#f50202">
          <font>
@@ -49,8 +46,8 @@
          </font>
       </Button>
       <Button fx:id="ukloniBtn" layoutX="152.0" layoutY="458.0" mnemonicParsing="false" onAction="#ukloni" prefHeight="71.0" prefWidth="95.0" text="Ukloni Stan" textFill="#f21414" />
-      <ChoiceBox fx:id="cbVlasnik" layoutX="208.0" layoutY="305.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="cbMjesto" layoutX="208.0" layoutY="360.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="cbVrsta" layoutX="208.0" layoutY="422.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="cbVlasnik" layoutX="50.0" layoutY="305.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="cbMjesto" layoutX="50.0" layoutY="360.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="cbVrsta" layoutX="50.0" layoutY="415.0" prefWidth="150.0" />
     </children>
 </AnchorPane>

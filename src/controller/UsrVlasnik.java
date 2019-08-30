@@ -75,12 +75,6 @@ public class UsrVlasnik implements Initializable{
     TextField vCijena;
 
     @FXML
-    TextField vMjesto;
-
-    @FXML
-    TextField vVrstaStana;
-
-    @FXML
     TextField vBrojSoba;
 
     @FXML
@@ -113,6 +107,9 @@ public class UsrVlasnik implements Initializable{
     ObservableList<String> mjesta = FXCollections.observableArrayList();
     ObservableList<String> vrstaStana = FXCollections.observableArrayList();
 
+    public String mjesto;
+    public String VrstaStana;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -142,24 +139,28 @@ public class UsrVlasnik implements Initializable{
 
         chBox.setItems(this.mjesta);
         chBox.setTooltip(new Tooltip("Odaberi mjesto"));
-        chBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                vMjesto.setText(mjesta.get(newValue.intValue()));
-            }
-        });
+
 
         this.vrstaStana.add(0,"namješten");
         this.vrstaStana.add(1,"nenamješten");
 
         chBoxVrsta.setItems(vrstaStana);
         chBoxVrsta.setTooltip(new Tooltip("Odaberi vrstu stana"));
+
+        chBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                mjesto=mjesta.get(newValue.intValue());
+            }
+        });
+
         chBoxVrsta.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                vVrstaStana.setText(vrstaStana.get(newValue.intValue()));
+                VrstaStana=vrstaStana.get(newValue.intValue());
             }
         });
+
         this.popuniStanove();
     }
 
@@ -175,17 +176,15 @@ public class UsrVlasnik implements Initializable{
         String brojKvadrata = this.vBrojKvadrata.getText();
         String brojSoba = this.vBrojSoba.getText();
         String cijena = this.vCijena.getText();
-        String mjesto = this.vMjesto.getText();
-        String vrstaStana = this.vVrstaStana.getText();
-
         int vlasnikFK=trenutniLogirani.dohvatiID();
         int mjestoFK=0;
         int vrstaStanaFK=0;
 
+
         try {
             PreparedStatement stmnt = Database.CONNECTION.prepareStatement("SELECT mjesto.id_mjesto,vrstastana.id_vrstaStana FROM mjesto,vrstastana WHERE nazivMjesta=? AND vrstaStana=?");
             stmnt.setString(1, mjesto);
-            stmnt.setString(2, vrstaStana);
+            stmnt.setString(2, VrstaStana);
             ResultSet rs = stmnt.executeQuery();
 
             if (rs.next()) {
@@ -201,7 +200,7 @@ public class UsrVlasnik implements Initializable{
                 return;
             }
 
-            if(adresa.equals("")||brojKvadrata.equals("")||brojSoba.equals("")||cijena.equals("")||mjesto.equals("")&(vrstaStana=="namješten"||vrstaStana=="nenamješten")){
+            if(adresa.equals("")||brojKvadrata.equals("")||brojSoba.equals("")||cijena.equals("")||mjesto.equals("")&!(VrstaStana.equals("namješten")||VrstaStana.equals("nenamješten"))){
                 return;
             }
 
@@ -213,7 +212,6 @@ public class UsrVlasnik implements Initializable{
                 this.selectedStan.setVlasnik(vlasnikFK);
                 this.selectedStan.setMjesto(mjestoFK);
                 this.selectedStan.setVrstaStana(vrstaStanaFK);
-
 
                 Stan.update(this.selectedStan);
                 this.selectedStan=null;

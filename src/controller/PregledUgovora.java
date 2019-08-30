@@ -80,33 +80,41 @@ public class PregledUgovora implements Initializable {
     @FXML
     public void prihvatiUgovor(ActionEvent ev){
         Ugovor u = (Ugovor) this.tableUgovor.getSelectionModel().getSelectedItem();
-        try {
-            PreparedStatement stmnt = Database.CONNECTION.prepareStatement("UPDATE ugovor SET Potvrda=? WHERE id_ugovor=?");
-            stmnt.setString(1, "UGOVOR PRIHVAĆEN");
-
-            stmnt.setInt(2, u.getId());
-            stmnt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("Ugovor nije uređen: " + e.getMessage());
+        if(u==null) {
+            return;
         }
+            try {
+                PreparedStatement stmnt = Database.CONNECTION.prepareStatement("UPDATE ugovor SET Potvrda=? WHERE id_ugovor=?");
+                stmnt.setString(1, "UGOVOR PRIHVAĆEN");
 
-        popuniUgovore();
-    }
+                stmnt.setInt(2, u.getId());
+                stmnt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println("Ugovor nije uređen: " + e.getMessage());
+            }
+
+            popuniUgovore();
+        }
 
     @FXML
     public void raskiniUgovor(ActionEvent ev){
         Ugovor u = (Ugovor) this.tableUgovor.getSelectionModel().getSelectedItem();
-        try {
-            PreparedStatement stmnt = Database.CONNECTION.prepareStatement("UPDATE ugovor SET Potvrda=? WHERE id_ugovor=?");
-            stmnt.setString(1, "UGOVOR ODBAČEN");
-
-            stmnt.setInt(2, u.getId());
-            stmnt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("Ugovor nije uređen: " + e.getMessage());
+        if(u==null){
+            return;
         }
+        else {
+            try {
+                PreparedStatement stmnt = Database.CONNECTION.prepareStatement("UPDATE ugovor SET Potvrda=? WHERE id_ugovor=?");
+                stmnt.setString(1, "UGOVOR ODBAČEN");
 
-        popuniUgovore();
+                stmnt.setInt(2, u.getId());
+                stmnt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println("Ugovor nije uređen: " + e.getMessage());
+            }
+
+            popuniUgovore();
+        }
     }
 
 

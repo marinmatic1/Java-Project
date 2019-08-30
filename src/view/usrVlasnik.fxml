@@ -36,12 +36,12 @@
       <TextField fx:id="vBrojKvadrata" layoutX="838.0" layoutY="75.0" promptText="Broj Kvadrata" />
       <TextField fx:id="vBrojSoba" layoutX="838.0" layoutY="120.0" promptText="Broj Soba" />
       <TextField fx:id="vCijena" layoutX="838.0" layoutY="164.0" promptText="Cijena" />
-      <TextField fx:id="vMjesto" layoutX="838.0" layoutY="213.0" promptText="Mjesto" />
-      <TextField fx:id="vVrstaStana" layoutX="838.0" layoutY="258.0" promptText="Vrsta Stana" />
       <Button fx:id="odjavaBtn" layoutX="943.0" layoutY="425.0" mnemonicParsing="false" onAction="#odjava" prefHeight="48.0" prefWidth="89.0" text="Odjava" textFill="#ff00b2" />
       <Button fx:id="ukloniBtn" layoutX="943.0" layoutY="332.0" mnemonicParsing="false" onAction="#ukloni" prefHeight="48.0" prefWidth="89.0" text="Ukloni" textFill="#f80000" />
-      <ChoiceBox fx:id="chBox" layoutX="668.0" layoutY="213.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="chBoxVrsta" layoutX="668.0" layoutY="258.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="chBox" layoutX="838.0" layoutY="213.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="chBoxVrsta" layoutX="838.0" layoutY="258.0" prefWidth="150.0" />
       <Button fx:id="pregledUgovoraBtn" layoutX="816.0" layoutY="425.0" mnemonicParsing="false" onAction="#pregledUgovora" prefHeight="48.0" prefWidth="111.0" text="Pregled Ugovora" />
+      <Label layoutX="845.0" layoutY="192.0" text="Grad" />
+      <Label layoutX="844.0" layoutY="241.0" text="Vrsta" />
    </children>
 </AnchorPane>
