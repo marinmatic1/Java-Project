@@ -93,6 +93,7 @@ public class StrUgovor implements Initializable{
         }catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println(this.korisnik.getIme());
 
 
         try {
@@ -106,7 +107,6 @@ public class StrUgovor implements Initializable{
             if (rs.next()){
                 this.korisnik.setId(rs.getInt(1));
             }
-            label.setText("Zahtjev uspješno poslat!");
             return;
         } catch (SQLException e) {
             System.out.println("Korisnik nije dodan: "+ e.getMessage());
@@ -155,14 +155,15 @@ public class StrUgovor implements Initializable{
             this.selectedUgovor.setDatum(datum);
             this.selectedUgovor.setOpis(opis);
             this.selectedUgovor.setId(stanID);
-            this.selectedUgovor.setPotvrda(0);
+            this.selectedUgovor.setPotvrda("U razmatranju..");
 
             Ugovor.update(this.selectedUgovor);
             this.selectedUgovor=null;
         }
         else {
-            Ugovor u = new Ugovor(0,opis,datum,stanID,0,korisnickoIme);
+            Ugovor u = new Ugovor(0,opis,datum,stanID,"U razmatranju..",korisnickoIme);
             Ugovor.add(u);
+            label.setText("Zahtjev uspješno poslat!");
             ucitaj(u.getId());
         }
 

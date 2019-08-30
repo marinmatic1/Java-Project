@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 30, 2019 at 06:15 PM
+-- Generation Time: Aug 30, 2019 at 07:15 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.1.31
 
@@ -96,7 +96,6 @@ CREATE TABLE `stan` (
 --
 
 INSERT INTO `stan` (`id_stan`, `vlasnik_fk`, `adresa`, `brojKvadrata`, `brojSoba`, `cijena`, `mjesto_fk`, `vrstaStana_fk`) VALUES
-(1, 1, 'Zagrebacka 126', '100', '3', '600 KM', 1, 1),
 (2, 2, 'mostar', '188', '4', '400', 1, 1),
 (6, 2, 'mostar', '120', '4', '600 KM', 1, 2);
 
@@ -111,7 +110,7 @@ CREATE TABLE `ugovor` (
   `opis` text COLLATE utf8_unicode_ci NOT NULL,
   `datum` date NOT NULL,
   `stan_fk` int(11) NOT NULL,
-  `Potvrda` tinyint(1) NOT NULL,
+  `Potvrda` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `imeKlijenta` varchar(45) CHARACTER SET utf8 COLLATE utf8_croatian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -120,11 +119,7 @@ CREATE TABLE `ugovor` (
 --
 
 INSERT INTO `ugovor` (`id_ugovor`, `opis`, `datum`, `stan_fk`, `Potvrda`, `imeKlijenta`) VALUES
-(20, 'neki opiis 54', '2019-08-06', 2, 0, 'pero'),
-(21, 'neki opiis 54', '2019-08-06', 1, 0, 'pero'),
-(22, 'ugovor 6', '2019-08-14', 1, 0, 'pero'),
-(23, 'ugovor 7', '2019-08-28', 2, 0, 'pero'),
-(24, 'ugovor 8', '2019-08-09', 1, 0, 'pero');
+(31, 'neki opis 2', '2019-08-21', 2, 'U razmatranju..', 'pero');
 
 -- --------------------------------------------------------
 
@@ -144,11 +139,7 @@ CREATE TABLE `vlasnikugovor` (
 --
 
 INSERT INTO `vlasnikugovor` (`id_vlasnikUgovor`, `ime`, `prezime`, `ugovor_fk`) VALUES
-(1, 'Marin', 'Matic', 20),
-(2, 'Anamarija', 'Dumancic', 21),
-(3, 'Anamarija', 'Dumancic', 22),
-(4, 'Marin', 'Matic', 23),
-(5, 'Anamarija', 'Dumancic', 24);
+(9, 'Marin', 'Matic', 31);
 
 -- --------------------------------------------------------
 
@@ -240,13 +231,13 @@ ALTER TABLE `stan`
 -- AUTO_INCREMENT for table `ugovor`
 --
 ALTER TABLE `ugovor`
-  MODIFY `id_ugovor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_ugovor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `vlasnikugovor`
 --
 ALTER TABLE `vlasnikugovor`
-  MODIFY `id_vlasnikUgovor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_vlasnikUgovor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `vrstastana`
@@ -265,18 +256,6 @@ ALTER TABLE `stan`
   ADD CONSTRAINT `stan_ibfk_1` FOREIGN KEY (`mjesto_fk`) REFERENCES `mjesto` (`id_mjesto`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `stan_ibfk_2` FOREIGN KEY (`vlasnik_fk`) REFERENCES `korisnik` (`id_vlasnik`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `stan_ibfk_3` FOREIGN KEY (`vrstaStana_fk`) REFERENCES `vrstastana` (`id_vrstaStana`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `ugovor`
---
-ALTER TABLE `ugovor`
-  ADD CONSTRAINT `ugovor_ibfk_2` FOREIGN KEY (`stan_fk`) REFERENCES `stan` (`id_stan`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `vlasnikugovor`
---
-ALTER TABLE `vlasnikugovor`
-  ADD CONSTRAINT `vlasnikugovor_ibfk_1` FOREIGN KEY (`ugovor_fk`) REFERENCES `ugovor` (`id_ugovor`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

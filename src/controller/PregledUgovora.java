@@ -82,7 +82,7 @@ public class PregledUgovora implements Initializable {
         Ugovor u = (Ugovor) this.tableUgovor.getSelectionModel().getSelectedItem();
         try {
             PreparedStatement stmnt = Database.CONNECTION.prepareStatement("UPDATE ugovor SET Potvrda=? WHERE id_ugovor=?");
-            stmnt.setInt(1, 1);
+            stmnt.setString(1, "UGOVOR PRIHVAĆEN");
 
             stmnt.setInt(2, u.getId());
             stmnt.executeUpdate();
@@ -98,7 +98,7 @@ public class PregledUgovora implements Initializable {
         Ugovor u = (Ugovor) this.tableUgovor.getSelectionModel().getSelectedItem();
         try {
             PreparedStatement stmnt = Database.CONNECTION.prepareStatement("UPDATE ugovor SET Potvrda=? WHERE id_ugovor=?");
-            stmnt.setInt(1, 0);
+            stmnt.setString(1, "UGOVOR ODBAČEN");
 
             stmnt.setInt(2, u.getId());
             stmnt.executeUpdate();

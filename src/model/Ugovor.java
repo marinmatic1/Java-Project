@@ -12,7 +12,7 @@ public class Ugovor {
     private String opis;
     private Date datum;
     private int stan;
-    private int potvrda;
+    private String potvrda;
     private String imeKlijenta;
     private String imeVlasnika;
 
@@ -27,7 +27,7 @@ public class Ugovor {
     public Ugovor() {
     }
 
-    public Ugovor(int id, String opis, Date datum, int potvrda, String imeKlijenta, String imeVlasnika) {
+    public Ugovor(int id, String opis, Date datum, String potvrda, String imeKlijenta, String imeVlasnika) {
         this.id = id;
         this.opis = opis;
         this.datum = datum;
@@ -36,7 +36,7 @@ public class Ugovor {
         this.imeVlasnika = imeVlasnika;
     }
 
-    public Ugovor(int id, String opis, Date datum, int stan, int potvrda, String imeKlijenta) {
+    public Ugovor(int id, String opis, Date datum, int stan, String potvrda, String imeKlijenta) {
         this.id = id;
         this.opis = opis;
         this.datum = datum;
@@ -86,11 +86,11 @@ public class Ugovor {
         this.stan = stan;
     }
 
-     public int getPotvrda() {
+     public String getPotvrda() {
         return potvrda;
     }
 
-    public void setPotvrda(int potvrda) {
+    public void setPotvrda(String potvrda) {
         this.potvrda = potvrda;
     }
 
@@ -100,7 +100,7 @@ public class Ugovor {
             stmnt.setString(1, u.getOpis());
             stmnt.setDate(2, u.getDatum());
             stmnt.setInt(3, u.getStan());
-            stmnt.setInt(4,u.getPotvrda());
+            stmnt.setString(4,u.getPotvrda());
             stmnt.setString(5,u.getImeKlijenta());
             stmnt.executeUpdate();
             ResultSet rs = stmnt.getGeneratedKeys();
@@ -132,7 +132,7 @@ public class Ugovor {
             stmnt.setString(1, u.getOpis());
             stmnt.setDate(2, u.getDatum());
             stmnt.setInt(3, u.getStan());
-            stmnt.setInt(4,u.getPotvrda());
+            stmnt.setString(4,u.getPotvrda());
             stmnt.setString(5,u.getImeKlijenta());
 
             stmnt.setInt(6, u.getId());
@@ -157,7 +157,7 @@ public class Ugovor {
                         rs.getString(2),
                         rs.getDate(3),
                         rs.getInt(4),
-                        rs.getInt(5),
+                        rs.getString(5),
                         rs.getString(5)
                 ));
             }
@@ -176,12 +176,12 @@ public class Ugovor {
             Statement stmnt = Database.CONNECTION.createStatement();
             ResultSet rs = stmnt.executeQuery("SELECT ugovor.id_ugovor,ugovor.opis,ugovor.datum,ugovor.potvrda,ugovor.imeKlijenta,vlasnikugovor.ime FROM ugovor,vlasnikugovor WHERE id_ugovor=vlasnikugovor.ugovor_FK");
              while(rs.next()) {
-                 if (logiraniKorisnik.dohvatiIme().equals(rs.getString(6))) {
+                 if (logiraniKorisnik.dohvatiIme().equals(rs.getString(6))||logiraniKorisnik.dohvatiUlogu().equals("ADMIN")) {
                         ugovor.add(new Ugovor(
                              rs.getInt(1),
                              rs.getString(2),
                              rs.getDate(3),
-                             rs.getInt(4),
+                             rs.getString(4),
                              rs.getString(5),
                              rs.getString(6)
                      ));
