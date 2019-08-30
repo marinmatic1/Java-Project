@@ -3,9 +3,13 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import model.Database;
 import model.Korisnik;
 
@@ -31,6 +35,9 @@ public class Login implements Initializable {
     @FXML
     Button registracijaBtn;
 
+    @FXML
+    AnchorPane anchorPane;
+
     public static Korisnik logiraniKorisnik;
 
     @FXML
@@ -39,13 +46,9 @@ public class Login implements Initializable {
         String lozinka = lozinkaTxt.getText();
         try {
             PreparedStatement stmnt = Database.CONNECTION.prepareStatement("SELECT * FROM korisnik WHERE korisnickoIme=? AND lozinka=?");
-            //PreparedStatement stmnt1 = Database.CONNECTION.prepareStatement("SELECT * FROM klijent WHERE korisnickoIme=? AND lozinka=?");
             stmnt.setString(1, korisnickoIme);
             stmnt.setString(2, lozinka);
-            /*stmnt1.setString(1, korisnickoIme);
-            stmnt1.setString(2, lozinka);*/
             ResultSet rs = stmnt.executeQuery();
-
             if (rs.next()) {
                 this.logiraniKorisnik = Korisnik.get(rs.getInt(1));
                 Utils u = new Utils();
@@ -65,6 +68,8 @@ public class Login implements Initializable {
             e.printStackTrace();
         }
     }
+
+
 
     public void registracija(ActionEvent a){
         Utils u = new Utils();
@@ -91,8 +96,20 @@ public class Login implements Initializable {
 
     public String dohvatiUlogu(){return this.logiraniKorisnik.getUloga();}
 
+
+    private void setGlobalEventHandler(Node root) {
+        root.addEventHandler(KeyEvent.KEY_PRESSED, ev -> {
+            if (ev.getCode() == KeyCode.ENTER) {
+                prijavaBtn.fire();
+                ev.consume();
+            }
+        });
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Node root=anchorPane;
+        setGlobalEventHandler(root);
 
     }
 }

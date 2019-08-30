@@ -73,7 +73,7 @@ public class AdminUgovor implements Initializable {
     }
     public void administracija(ActionEvent ev){
         Utils u = new Utils();
-        u.showNewWindow("login", ev);
+        u.showNewWindow("Administracija", ev);
     }
 
 }
