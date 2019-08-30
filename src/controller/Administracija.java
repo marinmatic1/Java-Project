@@ -19,7 +19,7 @@ public class Administracija {
     Button vMjesta;
 
     @FXML
-    Button vVrstaStana;
+    Button vUgovor;
 
     public void upravljajKorisnicima(ActionEvent ev){
         Utils u = new Utils();
@@ -39,6 +39,11 @@ public class Administracija {
     public void upravljajMjestima(ActionEvent ev){
         Utils u = new Utils();
         u.showNewWindow("strMjesto", ev);
+    }
+
+    public void upravljajUgovorima(ActionEvent ev){
+        Utils u = new Utils();
+        u.showNewWindow("AdminUgovor", ev);
     }
 
 }

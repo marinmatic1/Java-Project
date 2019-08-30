@@ -54,7 +54,7 @@ public class Login implements Initializable {
                     u.showNewWindow("usrVlasnik", a);
                 }
                 else if (logiraniKorisnik.getUloga().equals("KLIJENT")){
-                    u.showNewWindow("Ugovor", a);
+                    u.showNewWindow("usrKlijent", a);
                 }
                 else {
                     u.showNewWindow("Administracija", a);

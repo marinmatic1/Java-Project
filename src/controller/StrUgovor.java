@@ -73,8 +73,45 @@ public class StrUgovor implements Initializable{
 
     Login logiraniKorisnik = new Login();
 
+    Korisnik korisnik = new Korisnik();
 
 
+
+    public void ucitaj(int ugovorID){
+        Stan s = (Stan) this.stanTablica.getSelectionModel().getSelectedItem();
+        int id = s.getId();
+        System.out.println(ugovorID);
+
+        try {
+            PreparedStatement stmnt = Database.CONNECTION.prepareStatement("SELECT * FROM korisnik WHERE id_vlasnik=?");
+            stmnt.setInt(1, id);
+            ResultSet rs = stmnt.executeQuery();
+            if (rs.next()) {
+                this.korisnik = Korisnik.get(rs.getInt(1));
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            PreparedStatement stmnt = Database.CONNECTION.prepareStatement("INSERT INTO vlasnikugovor VALUES (?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+            stmnt.setInt(1,0);
+            stmnt.setString(2, this.korisnik.getIme());
+            stmnt.setString(3, this.korisnik.getPrezime());
+            stmnt.setInt(4,ugovorID);
+            stmnt.executeUpdate();
+            ResultSet rs = stmnt.getGeneratedKeys();
+            if (rs.next()){
+                this.korisnik.setId(rs.getInt(1));
+            }
+            System.out.println(ugovorID);
+            return;
+        } catch (SQLException e) {
+            System.out.println("Korisnik nije dodan: "+ e.getMessage());
+            return;
+        }
+
+    }
 
 
     @Override
@@ -90,6 +127,7 @@ public class StrUgovor implements Initializable{
 
 
         this.popuniStanove();
+
 
     }
     private void popuniStanove(){
@@ -123,7 +161,11 @@ public class StrUgovor implements Initializable{
         else {
             Ugovor u = new Ugovor(0,opis,datum,stanID,0,korisnickoIme);
             Ugovor.add(u);
+            ucitaj(u.getId());
         }
+
+
+
     }
 
     public void odjava(ActionEvent ev){

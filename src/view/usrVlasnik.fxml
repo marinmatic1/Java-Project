@@ -9,7 +9,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="498.0" prefWidth="1033.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UsrVlasnik">
    <children>
       <TableView fx:id="tableStanovi" prefHeight="200.0" prefWidth="812.0">
@@ -31,7 +30,7 @@
       <Label layoutX="14.0" layoutY="327.0" text="Prezime" />
       <TextArea fx:id="vKorisnickoIme" layoutX="98.0" layoutY="363.0" prefHeight="23.0" prefWidth="133.0" />
       <Label layoutX="14.0" layoutY="373.0" text="Korisnicko ime" />
-      <Button fx:id="dodajBtn" layoutX="838.0" layoutY="332.0" mnemonicParsing="false" onAction="#dodaj" prefHeight="48.0" prefWidth="89.0" text="Dodaj Stan" textFill="#0048ff" />
+      <Button fx:id="dodajBtn" layoutX="816.0" layoutY="332.0" mnemonicParsing="false" onAction="#dodaj" prefHeight="48.0" prefWidth="111.0" text="Dodaj Stan" textFill="#0048ff" />
       <TextField fx:id="vAdresa" layoutX="838.0" layoutY="36.0" promptText="Adresa" />
       <Label layoutX="838.0" layoutY="6.0" prefHeight="17.0" prefWidth="133.0" text="Dodavanje Stana" />
       <TextField fx:id="vBrojKvadrata" layoutX="838.0" layoutY="75.0" promptText="Broj Kvadrata" />
@@ -39,9 +38,10 @@
       <TextField fx:id="vCijena" layoutX="838.0" layoutY="164.0" promptText="Cijena" />
       <TextField fx:id="vMjesto" layoutX="838.0" layoutY="213.0" promptText="Mjesto" />
       <TextField fx:id="vVrstaStana" layoutX="838.0" layoutY="258.0" promptText="Vrsta Stana" />
-      <Button fx:id="odjavaBtn" layoutX="838.0" layoutY="424.0" mnemonicParsing="false" onAction="#odjava" prefHeight="48.0" prefWidth="89.0" text="Odjava" textFill="#ff00b2" />
-      <Button fx:id="ukloniBtn" layoutX="935.0" layoutY="332.0" mnemonicParsing="false" onAction="#ukloni" prefHeight="48.0" prefWidth="89.0" text="Ukloni" textFill="#f80000" />
+      <Button fx:id="odjavaBtn" layoutX="943.0" layoutY="425.0" mnemonicParsing="false" onAction="#odjava" prefHeight="48.0" prefWidth="89.0" text="Odjava" textFill="#ff00b2" />
+      <Button fx:id="ukloniBtn" layoutX="943.0" layoutY="332.0" mnemonicParsing="false" onAction="#ukloni" prefHeight="48.0" prefWidth="89.0" text="Ukloni" textFill="#f80000" />
       <ChoiceBox fx:id="chBox" layoutX="668.0" layoutY="213.0" prefWidth="150.0" />
       <ChoiceBox fx:id="chBoxVrsta" layoutX="668.0" layoutY="258.0" prefWidth="150.0" />
+      <Button fx:id="pregledUgovoraBtn" layoutX="816.0" layoutY="425.0" mnemonicParsing="false" onAction="#pregledUgovora" prefHeight="48.0" prefWidth="111.0" text="Pregled Ugovora" />
    </children>
 </AnchorPane>

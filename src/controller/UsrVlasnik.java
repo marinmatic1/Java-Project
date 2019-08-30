@@ -98,6 +98,9 @@ public class UsrVlasnik implements Initializable{
     @FXML
     ChoiceBox chBoxVrsta;
 
+    @FXML
+    Button pregledUgovoraBtn;
+
 
     Stan selectedStan = null;
 
@@ -244,9 +247,11 @@ public class UsrVlasnik implements Initializable{
         u.showNewWindow("login", ev);
     }
 
-
-
-
+    @FXML
+    public void pregledUgovora(ActionEvent ev){
+        Utils u = new Utils();
+        u.showNewWindow("VlasnikUgovor", ev);
+    }
 
 
 

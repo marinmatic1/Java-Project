@@ -13,11 +13,30 @@ public class Ugovor {
     private int stan;
     private int potvrda;
     private String imeKlijenta;
+    private String imeVlasnika;
+
+    public String getImeVlasnika() {
+        return imeVlasnika;
+    }
+
+    public void setImeVlasnika(String imeVlasnika) {
+        this.imeVlasnika = imeVlasnika;
+    }
 
     public Ugovor() {
     }
 
-    public Ugovor(int id, String opis, Date datum, int stan, int potvrda,String imeKlijenta) {
+    public Ugovor(int id, String opis, Date datum, int stan, int potvrda, String imeKlijenta, String imeVlasnika) {
+        this.id = id;
+        this.opis = opis;
+        this.datum = datum;
+        this.stan = stan;
+        this.potvrda = potvrda;
+        this.imeKlijenta = imeKlijenta;
+        this.imeVlasnika = imeVlasnika;
+    }
+
+    public Ugovor(int id, String opis, Date datum, int stan, int potvrda, String imeKlijenta) {
         this.id = id;
         this.opis = opis;
         this.datum = datum;

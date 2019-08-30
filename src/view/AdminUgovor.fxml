@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminUgovor">
+   <children>
+      <TableView fx:id="tableUgovor" layoutX="6.0" prefHeight="200.0" prefWidth="689.0">
+        <columns>
+          <TableColumn fx:id="vOpis" prefWidth="284.0" text="Opis" />
+          <TableColumn fx:id="vDatum" prefWidth="98.0" text="Datum" />
+            <TableColumn fx:id="vStanje" prefWidth="125.0" text="Stanje" />
+            <TableColumn fx:id="vImeKlijenta" prefWidth="91.0" text="Ime Klijenta" />
+            <TableColumn fx:id="vImeVlasnika" prefWidth="89.0" text="Ime Vlasnika" />
+        </columns>
+      </TableView>
+      <Button fx:id="izbrisiBtn" layoutX="48.0" layoutY="235.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="107.0" text="Izbriši Ugovor" />
+      <Button fx:id="administracijaBtn" layoutX="458.0" layoutY="235.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="107.0" text="Administracija" />
+   </children>
+</AnchorPane>

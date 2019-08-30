@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Administracija">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Administracija">
    <children>
       <Label layoutX="14.0" layoutY="47.0" prefHeight="70.0" prefWidth="268.0" text="Dobrodošli u administraciju.">
          <font>
@@ -24,7 +24,7 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Button fx:id="vVrstaStana" layoutX="38.0" layoutY="365.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="195.0" text="Upravljaj Vrsta Stana" textFill="#8105f5">
+      <Button fx:id="vUgovor" layoutX="38.0" layoutY="365.0" mnemonicParsing="false" onAction="#upravljajUgovorima" prefHeight="58.0" prefWidth="195.0" text="Upravljaj Ugovorima" textFill="#8105f5">
          <font>
             <Font size="18.0" />
          </font></Button>
