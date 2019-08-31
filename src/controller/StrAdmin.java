@@ -54,9 +54,6 @@ public class StrAdmin implements Initializable {
     TextField kLozinkaTxt;
 
     @FXML
-    TextField kUlogaTxt;
-
-    @FXML
     TextField kBrojTxt;
 
     @FXML
@@ -72,11 +69,12 @@ public class StrAdmin implements Initializable {
     Button vOdjava;
 
     @FXML
-            ChoiceBox cbUloga;
+    ChoiceBox cbUloga;
 
 
 
     ObservableList<String> uloga = FXCollections.observableArrayList();
+    public String Uloga;
 
 
 
@@ -101,7 +99,7 @@ public class StrAdmin implements Initializable {
         cbUloga.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                kUlogaTxt.setText(uloga.get(newValue.intValue()));
+                Uloga=(uloga.get(newValue.intValue()));
             }
         });
 
@@ -123,10 +121,9 @@ public class StrAdmin implements Initializable {
         String prezime = this.kPrezimeTxt.getText();
         String kIme = this.kKimeTxt.getText();
         String lozinka = this.kLozinkaTxt.getText();
-        String uloga = this.kUlogaTxt.getText();
         String brojTelefona = this.kBrojTxt.getText();
 
-        if (ime.equals("") || prezime.equals("") || kIme.equals("") || lozinka.equals("") || uloga.equals("") || brojTelefona.equals("")) {
+        if (ime.equals("") || prezime.equals("") || kIme.equals("") || lozinka.equals("") || Uloga.equals("") || brojTelefona.equals("")) {
             return;
         }
         if (this.selectedUser != null) {
@@ -134,14 +131,14 @@ public class StrAdmin implements Initializable {
             this.selectedUser.setPrezime(prezime);
             this.selectedUser.setKorisnickoIme(kIme);
             this.selectedUser.setLozinka(lozinka);
-            this.selectedUser.setUloga(uloga);
+            this.selectedUser.setUloga(Uloga);
             this.selectedUser.setBrojTelefona(brojTelefona);
 
             Korisnik.update(this.selectedUser);
             this.selectedUser = null;
             this.dodajBtn.setText("Dodaj korisnika");
         } else {
-            Korisnik k = new Korisnik(0, ime, prezime, kIme, lozinka, uloga, brojTelefona);
+            Korisnik k = new Korisnik(0, ime, prezime, kIme, lozinka, Uloga, brojTelefona);
             Korisnik.add(k);
         }
         this.popuniKorisnike();
@@ -150,7 +147,6 @@ public class StrAdmin implements Initializable {
         this.kPrezimeTxt.setText("");
         this.kKimeTxt.setText("");
         this.kLozinkaTxt.setText("");
-        this.kUlogaTxt.setText("");
         this.kBrojTxt.setText("");
 
     }

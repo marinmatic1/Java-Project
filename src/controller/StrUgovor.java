@@ -82,7 +82,6 @@ public class StrUgovor implements Initializable{
     public void ucitaj(int ugovorID){
         Stan s = (Stan) this.stanTablica.getSelectionModel().getSelectedItem();
         int id = s.getVlasnik();
-        System.out.println(id);
 
         try {
             PreparedStatement stmnt = Database.CONNECTION.prepareStatement("SELECT * FROM korisnik WHERE id_vlasnik=?");
@@ -94,7 +93,6 @@ public class StrUgovor implements Initializable{
         }catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println(this.korisnik.getIme());
 
 
         try {
@@ -165,7 +163,7 @@ public class StrUgovor implements Initializable{
         else {
             Ugovor u = new Ugovor(0,opis,datum,stanID,"U razmatranju..",korisnickoIme);
             Ugovor.add(u);
-            label.setText("Zahtjev uspješno poslat!");
+            label.setText("Zahtjev uspješno poslan!");
             ucitaj(u.getId());
         }
 

@@ -7,12 +7,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Korisnik;
-import model.Mjesto;
-import model.Stan;
-import model.Ugovor;
+import model.*;
 
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 public class AdminUgovor implements Initializable {
 
@@ -67,6 +66,13 @@ public class AdminUgovor implements Initializable {
             return;
         }
         else{
+            try {
+                PreparedStatement stmnt = Database.CONNECTION.prepareStatement("DELETE FROM vlasnikugovor WHERE ugovor_fk=?");
+                stmnt.setInt(1, u.getId());
+                stmnt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println("Korisnikugovor nije obrisan: " + e.getMessage());
+            }
             Ugovor.remove(u);
             this.popuniUgovore();
         }

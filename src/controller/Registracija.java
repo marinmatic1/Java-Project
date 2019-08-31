@@ -30,9 +30,6 @@ public class Registracija implements Initializable{
     TextField vLozinka;
 
     @FXML
-    TextField vUloga;
-
-    @FXML
     TextField vBrojTelefona;
 
     @FXML
@@ -55,6 +52,8 @@ public class Registracija implements Initializable{
 
     ObservableList<String> uloga = FXCollections.observableArrayList();
 
+    public String Uloga;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.uloga.add(0,"KLIJENT");
@@ -65,7 +64,7 @@ public class Registracija implements Initializable{
         cbUloga.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                vUloga.setText(uloga.get(newValue.intValue()));
+                Uloga=(uloga.get(newValue.intValue()));
             }
         });
     }
@@ -76,7 +75,6 @@ public class Registracija implements Initializable{
         String prezime = this.vPrezime.getText();
         String kIme = this.vKorisnickoIme.getText();
         String lozinka = this.vLozinka.getText();
-        String uloga = this.vUloga.getText();
         String brojTelefona = this.vBrojTelefona.getText();
         String lozinka2=this.vLozinka1.getText();
 
@@ -86,19 +84,19 @@ public class Registracija implements Initializable{
             return;
         }
 
-        if(uloga.equals("ADMIN")){
+        if(Uloga.equals("ADMIN")){
             label.setTextFill(Color.web("#0076a3"));
             label.setText("DOBAR POKUŠAJ ALI NE MOŽE hehehehe");
             return;
         }
 
-        if(!(uloga.equals("VLASNIK") || uloga.equals("KLIJENT"))){
+        if(!(Uloga.equals("VLASNIK") || Uloga.equals("KLIJENT"))){
             label.setTextFill(Color.web("#ff0000"));
             label.setText("KLIJENT ili VLASNIK mora biti odabran!");
             return;
         }
 
-        if (ime.equals("") || prezime.equals("") || kIme.equals("") || lozinka.equals("") || uloga.equals("") || brojTelefona.equals("")) {
+        if (ime.equals("") || prezime.equals("") || kIme.equals("") || lozinka.equals("") || Uloga.equals("") || brojTelefona.equals("")) {
             label.setTextFill(Color.web("#ff0000"));
             label.setText("Unesite potpune podatke!");
             return;
@@ -108,23 +106,22 @@ public class Registracija implements Initializable{
             this.selectedUser.setPrezime(prezime);
             this.selectedUser.setKorisnickoIme(kIme);
             this.selectedUser.setLozinka(lozinka);
-            this.selectedUser.setUloga(uloga);
+            this.selectedUser.setUloga(Uloga);
             this.selectedUser.setBrojTelefona(brojTelefona);
 
             Korisnik.update(this.selectedUser);
             this.selectedUser = null;
             this.dodajBtn.setText("Dodaj korisnika");
         } else {
-            Korisnik k = new Korisnik(0, ime, prezime, kIme, lozinka, uloga, brojTelefona);
+            Korisnik k = new Korisnik(0, ime, prezime, kIme, lozinka, Uloga, brojTelefona);
             Korisnik.add(k);
-            label.setText("Korisnik uspješno registriran kao "+uloga+".");
+            label.setText("Korisnik uspješno registriran kao "+Uloga+".");
         }
 
         this.vIme.setText("");
         this.vPrezime.setText("");
         this.vKorisnickoIme.setText("");
         this.vLozinka.setText("");
-        this.vUloga.setText("");
         this.vBrojTelefona.setText("");
 
     }
